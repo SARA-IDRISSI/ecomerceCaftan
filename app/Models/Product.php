@@ -23,26 +23,35 @@ class Product extends Model
         'sub_category_id'
     ];
 
-    public function productSizes() {
+    public function productSizes()
+    {
         return $this->hasMany(ProductSize::class);
     }
 
-    public function category() {
+    public function productImages()
+    {
+        return $this->hasMany(ImageProduct::class);
+    }
+
+    public function category()
+    {
         return $this->belongsTo(Categorie::class, 'categorie_id');
     }
 
-    public function getInstockAttribute() {
+    public function getInstockAttribute()
+    {
         $stock = 0;
-        foreach($this->productSizes as $item) {
-            $stock += (integer) $item->stock;
+        foreach ($this->productSizes as $item) {
+            $stock += (int) $item->stock;
         }
         return $stock;
     }
 
-    public function setInstockAttribute() {
+    public function setInstockAttribute()
+    {
         $stock = 0;
-        foreach($this->productSizes as $item) {
-            $stock += (integer) $item->stock;
+        foreach ($this->productSizes as $item) {
+            $stock += (int) $item->stock;
         }
         $this->attributes['instock'] = $stock;
     }

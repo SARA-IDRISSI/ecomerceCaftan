@@ -1,39 +1,38 @@
-const button = document.querySelector('#add-size');
-const sizes = document.querySelector('.sizes');
+const addColor = (event, size) => {
+    event.preventDefault();
+    console.log(size);
+    let count = $(`#colors-${size}-number`).val();
+    count++;
+    $(`.colors-${size}`).append(`<input name="color-${count}-${size}" type="color" class="form-control form-control-color ms-2"
+    id="exampleColorInput" value="#563d7c" title="Choose your color">`)
+    $(`.colors-${size}`).append(`<button onclick="removeColor(event, ${count}, '${size}')" class="btn btn-primary btn-small"
+    id="btn-color-${count}-${size}">x</button>`)
+    $(`#colors-${size}-number`).val(count);
+}
+
+const removeColor = (event, index, size) => {
+    event.preventDefault();
+    $(`input[name="color-${index}-${size}"]`).remove();
+    $(`#btn-color-${index}-${size}`).remove();
+    let count = $(`#colors-${size}-number`).val();
+    count--;
+    $(`#colors-${size}-number`).val(count);
+}
+
 let i = 0;
-
-button.addEventListener('click', event => {
-    event.preventDefault();
+$('#add-image').on('click', event => {
     i++;
-    document.querySelector("#count-size").setAttribute("value", i);
-    sizes.innerHTML += `<div class="row g-3" id="container-size-${i}">
-    <div class="col-md-4">
-        <label for="inputState" class="form-label">Taille</label>
-        <select id="inputState" class="form-select" name="size-${i}">
-          <option value="S" selected>S</option>
-          <option value="M">M</option>
-          <option value="L">L</option>
-          <option value="XL">XL</option>
-
-        </select>
-      </div>
-    <div class="col-md-6">
-        <label for="exampleColorInput" class="form-label">Couleur</label>
-        <input name="color-${i}" type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color">
-    </div>
-    <div class="col-md-6">
-      <label for="stock" class="form-label">Stock</label>
-      <input name="stock-${i}" oninput="handleStockChange()" type="number" class="form-control form-control-color" id="stock">
-    </div>
-    <button id="btn-size-${i}">x</button>
-  </div>`;
-  document.querySelector(`#btn-size-${i}`).addEventListener("click", (event) => {
-    event.preventDefault();
-    document.querySelector(`#container-size-${i}`).remove();
-    i--;
-    document.querySelector("#count-size").setAttribute("value", i);
-  })
+    $('.images-container').append(`<div class="row">
+        <input type="file" name="image_${i}" class="form-control form-control-file" />
+        <input type="color" name="image_color_${i}" class="form-control form-control-color" />
+        <button onclick="removeImage(event, ${i})" class"btn btn-small"></button>
+    </div>`)
 })
+
+const removeImage = (event, index) => {
+
+}
+
 
 $categories = document.querySelector("#categories");
 
