@@ -1,0 +1,161 @@
+.hero_section{
+}
+.logo{
+    width: 120px;
+}
+.hero_img{
+    width: 100% ;
+}
+
+.description-img{
+    position: absolute;
+    left: 61%;
+    z-index: 100;
+    bottom: 20%;
+}
+.description-img p{
+    word-spacing: 5px;
+    font-size: 20px;
+    width: 400px;
+}
+.description-img button{
+    margin-top: 10px;
+    background-color: black;
+    color: yellow;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.box{
+    margin-bottom: 10px;
+    width: 500px;
+    position: relative;
+
+
+
+}
+.box img{
+    width: 500px;
+    height: 395px;
+}
+.img_shadow{
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;    width: 380px;
+
+}
+.store img{
+    height: 800px;
+    width: 630px;
+
+}
+.store{
+    width: 100%;
+}
+
+.catg::before{
+    content: '';
+    width: 200px;
+    background-color: black;
+    height: 6px;
+    display: inline-block;
+    position: relative;
+    bottom: 15px;
+}
+.catg::after{
+    content: '';
+    width: 200px;
+    background-color: black;
+    height: 6px;
+    display: inline-block;
+    position: relative;
+    bottom: 15px;
+}
+.catg{
+    text-align: center;
+    padding: 50px 0px;
+    font-size: 60px;
+}
+.arrivel p, .bestSellers p{
+    font-size: 50px;
+    padding-top: 20px;
+}
+
+.bestSellers p::before, .arrivel p::before{
+    content: '';
+    background-color: palevioletred;
+    width: 8px;
+    height:42px;
+    display: inline-block;
+    margin-right:20px;
+
+}
+.bgSlice{
+    background-image: url(/images/about1.webp);
+    width: 100px;
+    height: 90vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+input[type="number"]{
+    width: 40px;
+    height: 25px;
+}
+
+.tit-catg{
+    position: absolute;
+    bottom: 300px;
+    left: 50px;
+    font-size: 20px;
+    font-weight: bold;
+
+
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+  }
+
+  .price {
+    color: grey;
+    font-size: 22px;
+  }
+
+  .card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+
+  .card button:hover {
+    opacity: 0.7;
+  }
+  .img-boot-catg{
+    height: 200px !important;
+  }
+  /* afficher all product */
+  .img-tab{
+    width: 70px;
+    height: 70px;
+  }
+  table th {
+    max-width:100%;
+    white-space:nowrap;
+  }
+
+  table td{
+    max-width:100%;
+    white-space:nowrap;
+  }
+
+
+
