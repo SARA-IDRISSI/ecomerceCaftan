@@ -6,11 +6,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Paddle\Billable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +26,12 @@ class User extends Authenticatable
         'adressLine',
         'contactNo',
         'lastActivity',
+        'pays',
+        'ville',
+        'firstname',
+        'lastname',
         'loggedIn',
+        'newsletter'
     ];
 
     /**

@@ -15,4 +15,21 @@ class ProductSize extends Model
         'colors',
         'stock',
     ];
+
+    public function getColorsAttribute($value)
+    {
+        $colorsAndStocks = explode(",", $value);
+        $colorsAndStocksArray = [];
+        foreach ($colorsAndStocks as $colorAndStock) {
+            $array = explode(":", $colorAndStock);
+            if (count($array) > 1) {
+                $colorsAndStocksArray[$array[0]] = $array[1];
+            }
+        }
+        return $colorsAndStocksArray;
+    }
+
+    public function colors() {
+        
+    }
 }

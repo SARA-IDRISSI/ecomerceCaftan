@@ -12,11 +12,13 @@ class Categorie extends Model
         'libeleCateg',
     ];
 
-    public function subCategories() {
+    public function subCategories()
+    {
         return $this->hasMany(SubCategory::class);
     }
 
-    public function products() {
+    public function products()
+    {
         return $this->hasMany(Product::class);
     }
 }

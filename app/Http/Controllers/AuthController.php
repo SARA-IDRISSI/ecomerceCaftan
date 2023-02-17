@@ -11,8 +11,9 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function login(Request $request) {
-        if($request->isMethod('post')) {
+    public function login(Request $request)
+    {
+        if ($request->isMethod('post')) {
             $credentials = $request->validate([
                 'email' => ['required', 'email'],
                 'password' => ['required'],
@@ -30,10 +31,11 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function register(Request $request) {
-        if($request->isMethod('post')) {
+    public function register(Request $request)
+    {
+        if ($request->isMethod('post')) {
             $myUser = User::where("email", "=", $request->email)->getQuery();
-            if($myUser->exists()) {
+            if ($myUser->exists()) {
                 session()->flash('error', "L'email existe déjà");
                 // $_SESSION['error'] = "email existe déjà"
                 return back();
@@ -46,7 +48,8 @@ class AuthController extends Controller
             $user->password = Hash::make($request->password);
             $user->lastActivity = Carbon::now();
             $user->loggedIn = false;
-            if($request->hasFile('image') && $request->file('image')->isValid()) {
+            $user->newsletter = $request->newsletter ? true : false;
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $user->image = 'storage/' . $request->file('image')->store('users/images');
             }
             $user->save();

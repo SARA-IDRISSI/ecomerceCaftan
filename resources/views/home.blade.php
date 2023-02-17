@@ -1,5 +1,4 @@
 @extends('main')
-
 @section('title', 'home')
 @section('content')
 
@@ -52,11 +51,14 @@
             @endforeach
             <div class="col-6">
                 <div class="HIKING box">
-                  <a href="/category/1"><img src="{{asset('images/caftanCatg.jpeg')}}" alt="" class="img_shadow img-fluid"></a>
+                    <a href="/category/1"><img src="{{ asset('images/caftanCatg.jpeg') }}" alt=""
+                            class="img_shadow img-fluid"></a>
                     <p class="tit-catg">caftan</p>
                 </div>
                 <div class="CHUKKAS box ">
-                   <a href="/category/2"><img src="{{ asset('images/zoomin_2_ef9d9a4a-e169-47d5-bc75-cf3a6c81c844_400x.webp') }}" alt="" class="img_shadow img-fluid"></a>
+                    <a href="/category/2"><img
+                            src="{{ asset('images/zoomin_2_ef9d9a4a-e169-47d5-bc75-cf3a6c81c844_400x.webp') }}"
+                            alt="" class="img_shadow img-fluid"></a>
                     <p class="tit-catg">tkchita</p>
                 </div>
             </div>
@@ -71,15 +73,41 @@
             @foreach ($products as $product)
             @endforeach
             <div class="container row mx-auto">
-                <div class="col-4">
-                    <img class="img-fluid" src="{{ asset('images/caftan-vert.webp') }}" alt="" srcset="">
-                </div>
-                <div class="col-4">
-                    <img class="img-fluid" src="{{ asset('images/images.jpeg') }}" alt="" srcset="">
-                </div>
-                <div class="col-4">
-                    <img class="img-fluid" src="{{ asset('images/images2.jpeg') }}" alt="" srcset="">
-                </div>
+                @foreach ($products as $product)
+                    <div class="col-3">
+                        <div class="card">
+                            <a href="/detailProduct/{{ $product->id }}">
+                                <img src="/{{ $product->photo }}" class="img-boot-catg img-fluid">
+                                @if ($product->promo != 0)
+                                    <span>promo</span>
+                                @endif
+                            </a>
+
+                            <h1>{{ $product->title }}</h1>
+                            @if ($product->promo == 1)
+                                <p class="price">${{ $product->prix_promotion }}</p>
+                                <p class="price">${{ $product->prix_actuel }}</p>
+                            @else
+                                <p class="price">${{ $product->prix_actuel }}</p>
+                            @endif
+                            @php
+                                $items = Cart::instance('wishlist')->search(function ($cartItem) use ($product) {
+                                    return $cartItem->id == $product->id;
+                                });
+                            @endphp
+                            @if (count($items) > 0)
+                                <a href="/add-to-wishlist/{{ $product->id }}" class="iconList bg-danger">
+                                    <i class="bi bi-heart"></i>
+                                </a>
+                            @else
+                                <a href="/add-to-wishlist/{{ $product->id }}" class="iconList">
+                                    <i class="bi bi-heart"></i>
+                                </a>
+                            @endif
+                            <p><button>Acheter</button></p>
+                        </div>
+                    </div>
+                @endforeach
             </div>
 
         </section>
@@ -89,21 +117,43 @@
 
         <section class="bestSellers container">
             <p>BEST SELLERS</p>
-            @foreach ($products as $product)
-            @endforeach
+            <div class="row">
+                @foreach ($best_sellers as $best_seller)
+                    <div class="col-3">
+                        <div class="card">
+                            <a href="/detailProduct/{{ $best_seller->id }}">
+                                <img src="/{{ $best_seller->photo }}" class="img-boot-catg img-fluid">
+                                @if ($best_seller->promo != 0)
+                                    <span>promo</span>
+                                @endif
+                            </a>
 
-            <div class="container row mx-auto">
-                <div class="col-4">
-                    <img class="img-fluid" src="{{ asset('images/b1.jpeg') }}" alt="" srcset="">
-                </div>
-                <div class="col-4">
-                    <img class="img-fluid" src="{{ asset('images/b2.jpeg') }}" alt="" srcset="">
-                </div>
-                <div class="col-4">
-                    <img class="img-fluid" src="{{ asset('images/b3.jpeg') }}" alt="" srcset="">
-                </div>
+                            <h1>{{ $best_seller->title }}</h1>
+                            @if ($best_seller->promo == 1)
+                                <p class="price">${{ $best_seller->prix_promotion }}</p>
+                                <p class="price">${{ $best_seller->prix_actuel }}</p>
+                            @else
+                                <p class="price">${{ $best_seller->prix_actuel }}</p>
+                            @endif
+                            @php
+                                $items = Cart::instance('wishlist')->search(function ($cartItem) use ($best_seller) {
+                                    return $cartItem->id == $best_seller->id;
+                                });
+                            @endphp
+                            @if (count($items) > 0)
+                                <a href="/add-to-wishlist/{{ $best_seller->id }}" class="iconList bg-danger">
+                                    <i class="bi bi-heart"></i>
+                                </a>
+                            @else
+                                <a href="/add-to-wishlist/{{ $best_seller->id }}" class="iconList">
+                                    <i class="bi bi-heart"></i>
+                                </a>
+                            @endif
+                            <p><button>Acheter</button></p>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-
         </section>
 
     </main>

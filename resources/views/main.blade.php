@@ -14,14 +14,34 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/mdb.min.css') }}" />
+    <style>
+        .dropdown-menu li {
+            position: relative;
+        }
 
+        .dropdown-menu .dropdown-submenu {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: -7px;
+        }
 
+        .dropdown-menu .dropdown-submenu-left {
+            right: 100%;
+            left: auto;
+        }
+
+        .dropdown-menu>li:hover>.dropdown-submenu {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
     <header>
         <nav>
-            <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm section_nav">
                 <div class="container img-header">
                     <a class="navbar-brand" href=""><img src="{{ asset('images/shoe-logo-new_300x300.avif') }}"
                             alt="" class="logo"></a>
@@ -32,10 +52,11 @@
                     </button>
 
                     <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
-                        <form class="d-flex mx-auto " role="search">
+                        {{-- <form class="d-flex mx-auto " role="search">
                             <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                        </form> --}}
+                        @livewire('header-search-component')
                         <ul class="navbar-nav me-0 mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/">Home</a>
@@ -43,55 +64,105 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">A propos</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Catégorie
+                            <li class="nav-item dropdown dropdown-hover position-static">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-mdb-toggle="dropdown" aria-expanded="false">
+                                    Boutique
                                 </a>
-                                <ul class="dropdown-menu">
-                                    @foreach($categories as $category)
-                                    <li><a class="dropdown-item" href="/category/{{ $category->id }}">{{ $category->libeleCateg }}</a></li>
-                                    <ul class="">
-                                        @foreach($category->subCategories as $subCategory)
-                                        <li>{{ $subCategory->title }}</li>
-                                        @endforeach
-                                    </ul>
-                                    @endforeach
-                                </ul>
-                            </li>
+                                <!-- Dropdown menu -->
+                                <div class="dropdown-menu w-100 mt-5" aria-labelledby="navbarDropdown"
+                                    style="border-top-left-radius: 0;
+                                                  border-top-right-radius: 0;
+                                                ">
 
+                                    <div class="container">
+                                        <div class="row my-4">
+                                            <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                                                @foreach ($categories as $category)
+                                                    <div>
+                                                        <a class=""
+                                                            href="/category/{{ $category->id }}">{{ $category->libeleCateg }}
+                                                            @if (count($category->subCategories) > 0)
+                                                                &raquo;
+                                                            @endif
+                                                        </a>
+                                                    </div>
+                                                    @if (count($category->subCategories) > 0)
+                                                        <ul class="">
+                                                            @foreach ($category->subCategories as $subCategory)
+                                                                <li>
+                                                                    <a class="dropdown-item boutique-title"
+                                                                        href="#">{{ $subCategory->title }}</a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                                                <a class="navbar-brand" href=""><img
+                                                        src="{{ asset('images/b.webp') }}" alt=""
+                                                        class="image-menu">
+                                                </a>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3 mb-3 mb-md-0">
+                                                <a class="navbar-brand " href=""><img
+                                                        src="{{ asset('images/k.webp') }}" alt=""
+                                                        class="image-menu">
+                                                </a>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3">
+                                                <a class="navbar-brand " href=""><img
+                                                        src="{{ asset('images/t.jpg') }}" alt=""
+                                                        class="image-menu"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/NewArivals">New Arivals</a>
+                            </li>
                             {{-- contact --}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contact">Contact</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 @if (Auth::check())
-                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    <a class="nav-link  dropdown-toggle" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
 
                                         <i class="bi bi-person-circle"></i>
                                         <span> Hi, {{ Auth::user()->username }} </span>
                                     </a>
                                 @else
-                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    <a class="nav-link icon dropdown-toggle" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="bi bi-person-circle"></i>
                                     </a>
                                 @endif
                                 <ul class="dropdown-menu">
                                     @if (Auth::check())
-                                    <li><a class="dropdown-item" href="{{ route('logout') }}">logOut</a></li>
-                                    <li><a class="dropdown-item" href="#">Profile</a></li>
-
-                                @else
-                                <li><a class="dropdown-item" href="{{ route('login') }}">login</a></li>
-                                @endif
+                                        <li><a class="dropdown-item" href="{{ route('logout') }}">logOut</a></li>
+                                        <li><a class="dropdown-item" href="/dashboard">Profile</a></li>
+                                    @else
+                                        <li><a class="dropdown-item" href="{{ route('login') }}">login</a></li>
+                                    @endif
 
 
 
                                 </ul>
+                            </li>
                             <li class="nav-item">
-                                <a class="nav-link " aria-current="page" href="#"><i class="bi bi-cart3"></i></a>
+                                <a class="nav-link "
+                                    href="/pannier"><span>{{ Cart::instance('shopping')->count() }}</span><i
+                                        class="bi bi-cart3"></i></a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link "
+                                    href="/wishlist"><span>{{ Cart::instance('wishlist')->count() }}</span><i
+                                        class="bi bi-heart"></i></a>
                             </li>
-
                         </ul>
 
                     </div>
@@ -105,6 +176,7 @@
 
 
         <!-- JavaScript Bundle with Popper -->
+        <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
         </script>

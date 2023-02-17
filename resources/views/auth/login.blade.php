@@ -20,6 +20,15 @@
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
+            <div class="mt-3 d-flex justify-content-between">
+                <div class="col-6">
+                    <a href="forgotPassword">Mot de passe Oublier</a>
+                </div>
+                <div class="col-1">
+                    <a href="/register">S'inscrire</a>
+                </div>
+            </div>
+
         </form>
     </div>
 @endsection

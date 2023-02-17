@@ -28,6 +28,15 @@
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-primary">Sign Up</button>
             </div>
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck" name="newsletter">
+                    <label class="form-check-label" for="gridCheck">
+                        Envoyez-moi les nouvelles et les
+                        offres par e-mail
+                    </label>
+                </div>
+            </div>
         </form>
     </div>
 @endsection

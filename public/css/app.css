@@ -1,10 +1,9 @@
-.hero_section{
-}
+
 .logo{
     width: 120px;
 }
 .hero_img{
-    width: 100% ;
+    width: 100%;
 }
 
 .description-img{
@@ -156,6 +155,94 @@ input[type="number"]{
     max-width:100%;
     white-space:nowrap;
   }
+/* .color{
+    display: none;
+} */
+.boxPymnt{
+    color: black;
+    padding: 20px;
+    display: none;
+    margin-top: 20px;
+}
+
+input[type="number"]{
+    width: 80px;
+}
+.full{
+    width: 1325px !important;
+    position: absolute !important;
+    transform: none;
+    left: -150px !important;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+}
+.image-menu{
+    width: 350px;
+    height: 350px;
+}
+.boutique-title{
+    text-transform: capitalize !important;
+    font-size: 25px;
+    letter-spacing: 3px;
+    line-height: 50px;
+}
+.slider{
+    height: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    background: #ddd;
+}
 
 
+/* fin nav bar */
+/* debut de section list wish */
+.boxList{
+    border: 1px solid;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+/* fin de section list wish */
+
+/********************************************************SECTION ADD PRODUCT***********************************/
+.NomTaille{
+    color: black;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.addcolor{
+    background-color: transparent;
+    border: 2px solid ;
+    color: black;
+    text-transform:capitalize;
+
+}
+.inputStock{
+    width: 110px !important;
+}
+
+.email-dash{
+    color:blue
+}
+
+.image-dash{
+    width: 110px;
+    height: 110px;
+    border-radius: 90%;
+    -webkit-border-radius: 90%;
+    -moz-border-radius: 90%;
+    -ms-border-radius: 90%;
+    -o-border-radius: 90%;
+}
+
+/********************************************************FIN SECTION ADD PRODUCT***********************************/
 
