@@ -22,7 +22,7 @@ class AdminController extends Controller
     public function addProduct(Request $request)
     {
         if ($request->isMethod('post')) {
-            if ($request->filled(['title', 'description', 'codebar', 'prixenciene', 'prixactuel', 'category_id'])) {
+            if ($request->filled(['title', 'description', 'codebar', 'prixactuel', 'category_id'])) {
                 if ($request->hasFile('image') && $request->file('image')->isValid()) {
                     $image = 'storage/' . $request->image->store('products/image');
                     $instock = 0;
@@ -97,14 +97,19 @@ class AdminController extends Controller
     {
         if ($request->isMethod('post')) {
             if ($request->filled(['title'])) {
-                Categorie::create([
-                    'libeleCateg' => $request->title
-                ]);
-                // $category = new Categorie();
-                // $category->title = $request->title;
-                // $category->save();
-                session()->flash('success', 'Catégorie ajoutée avec succès!');
-                return back();
+                if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                    $image = 'storage/' . $request->image->store('categories/image');
+
+                    Categorie::create([
+                        'libeleCateg' => $request->title,
+                        'imageCategory' => $image
+                    ]);
+                    session()->flash('success', 'Catégorie ajoutée avec succès!');
+                    return back();
+                } else {
+                    session()->flash('error', 'Image obligatoire');
+                    return back();
+                }
             } else {
                 session()->flash('error', 'Champs obligatoire');
                 return back();

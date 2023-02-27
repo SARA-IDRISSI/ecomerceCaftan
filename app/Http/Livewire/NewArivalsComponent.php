@@ -95,7 +95,7 @@ class NewArivalsComponent extends Component
                 ->get();
         }
         if (count($this->products) == 0) {
-            $this->message = "No products available for " . implode(",", $this->sizeInputs);
+            $this->message = "No products available " . implode(",", $this->sizeInputs);
         } else {
             $this->message = "";
         }

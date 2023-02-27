@@ -45,21 +45,21 @@
                     <td>{{ $article->prix_actuel }}</td>
                     <td>
                         @foreach ($article->productSizes as $item)
-                            <p>{{ $item->stock }}</p>
+                            <p class="mb-4">{{ $item->stock }}</p>
                         @endforeach
                     </td>
                     <td>
                         @foreach ($article->productSizes as $item)
-                            <p>{{ $item->size }}</p>
+                            <p class="mb-4">{{ $item->size }}</p>
                         @endforeach
                     </td>
                     <td>
                         @foreach ($article->productSizes as $item)
-                            <strong>{{ $item->size }} </strong>
+                            {{-- <strong>{{ $item->size }} </strong> --}}
                             @foreach ($item->colors as $color => $stock)
-                                <div>
+                                <div class="mb-3">
                                     <input type="color" value="{{ $color }}" disabled />
-                                    <span>{{ $stock }}</span>
+                                    {{-- <span>{{ $stock }}</span> --}}
                                 </div>
                             @endforeach
                         @endforeach
@@ -79,18 +79,18 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Modal title</h5>
+                                    <h5 class="modal-title text-danger">Delete Product</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Modal body text goes here</p>
+                                    <p>Voulez Vous Vraiment supprimer le produit ?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Annuler</button>
                                     <button data-bs-dismiss="modal" wire:click="delete({{ $article->id }})"
-                                        class="btn btn-primary">
+                                        class="btn btn-danger">
                                         Oui</button>
                                 </div>
                                 {{-- <a href="/delete/{{ $article->id }}"

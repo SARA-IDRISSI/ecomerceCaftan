@@ -23,7 +23,7 @@
                     @foreach (Cart::content() as $key => $item)
                         <tr>
                             <th scope="row">{{ (int) $key + 1 }}</th>
-                            <td><img src="/{{ $item->options->photo }}" /></td>
+                            <td><img src="/{{ $item->options->photo }}" class=" w-25 h-25" /></td>
                             <td>{{ $item->name }}</td>
                             <td><a href="{{ route('degrade', ['rowId' => $item->rowId]) }}">-</a>{{ $item->qty }}<a
                                     href="{{ route('upgrade', ['rowId' => $item->rowId]) }}">+</a></td>
@@ -36,10 +36,13 @@
                     @endforeach
                 </tbody>
             </table>
-            <a href="/detailProduct/{{ session('last_visited') }}">countinuer tes achats</a>
+            <button class="colo border-0 px-3 py-2 ms-3"> <a href="/detailProduct/{{ session('last_visited') }}"
+                    class="colo">Countinuer
+                    tes achats</a>
+            </button>
             {{-- <a href="{{ URL::previous() }}">Back</a> --}}
-            <a href="/cordonnerPayer">Buy it
-                now</a>
+            <button class="colo border-0 px-3 py-2 ms-3"> <a href="/cordonnerPayer" class="colo">Buy it
+                    now</a></button>
         </div>
 
     </main>

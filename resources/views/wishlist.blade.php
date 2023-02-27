@@ -4,23 +4,23 @@
     <main>
         <div class="container mx-auto">
             @foreach (Cart::instance('wishlist')->content() as $key => $item)
-                <div class="col-md-4">
-                    <div class="boxList d-flex">
-                        <div class="imgList">
-                            <a href=""><img src="/{{ $item->options->photo }}" /></a>
+                <div class="col-md-3 mt-5 ">
+                    <div class="boxList d-flex justify-content-between">
+                        <div class="imgList pe-0 me-0 ">
+                            <a href=""><img src="/{{ $item->options->photo }}" class="  imgBox" /></a>
                         </div>
-                        <div class="descList">
-                            <p>{{ $item->name }}</p>
+                        <div class="descList ps-3 ">
+                            <p class="descP pt-3 ">{{ $item->name }}</p>
                             @if ($item->options->prixPromo)
-                                <p> <del>{{ $item->options->prix_actuel }}</del> <span>
-                                        {{ $item->price }}</span></p>
+                                <p class="ps-1 fs-3"> <del>{{ $item->options->prix_actuel }}</del>dh <span>
+                                        {{ $item->price }} dh</span></p>
                             @else
-                                <p> <span>{{ $item->price }}</span></p>
+                                <p class=" color fs-5"> <span>{{ $item->price }}dh</span></p>
                             @endif
 
                         </div>
                         <a href="/delete-from-wishlist/{{ $item->rowId }}" class="iconList">
-                            <i class="bi bi-x"></i>
+                            <i class="bi bi-x text-danger fs-5"></i>
                         </a>
                     </div>
                 </div>

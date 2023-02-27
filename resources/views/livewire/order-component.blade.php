@@ -1,5 +1,6 @@
 <section class="col-9 mt-4" style="overflow-x: scroll">
     <div class="row container mb-3">
+        <h1 class="text-black mb-5  titleDashboard">All Orders</h1>
         <div class="col-4">
             <input type="date" placeholder="filtrer par Date de la commande"
                 wire:change='handleChangeDate($event.target.value)' class="form-control" />
@@ -40,8 +41,8 @@
                     <td>{{ $item->user->contactNo }}</td>
                     <td>{{ $item->user->adressLine }}</td>
                     <td>
-                        <button class="btn btn-primary"><a href="/show/{{ $item->id }}" class="text-light"><i
-                                    class="fa fa-pencil-square-o" aria-hidden="true"></i>show</a></button>
+                        <button class="btn btn-primary"><a href="/show/{{ $item->id }}" class="text-light">
+                                <i class="fa-regular fa-eye"></i> Details</a></button>
                     </td>
                 </tr>
             @endforeach

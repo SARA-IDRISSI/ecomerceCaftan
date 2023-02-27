@@ -12,8 +12,11 @@ class DetailController extends Controller
     public function getProduct($id)
     {
         $article = Product::find($id);
-        return view("detailProduct", ['article' => $article]);
+        $best_sellers = Product::orderBy("nbr_sales", "DESC")->limit(4)->get();
+
+        return view("detailProduct", ['article' => $article, "best_sellers" => $best_sellers]);
     }
+
 
     public function buyNow(Request $request)
     {

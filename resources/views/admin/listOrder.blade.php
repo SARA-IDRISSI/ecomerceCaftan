@@ -1,3 +1,4 @@
+@extends('main')
 @extends('admin.dashboard')
 @section('form')
     @livewireStyles

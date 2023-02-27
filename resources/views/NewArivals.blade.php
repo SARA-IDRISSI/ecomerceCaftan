@@ -5,7 +5,7 @@
 
 
         <div class="container row gx-1 mx-auto gy-5">
-            <h1>New Arivals</h1>
+            <h1 class=" text-black  mt-5 titleDashboard fs-1">New Arivals</h1>
             {{-- @if ($message)
                 <h4>{{ $message }}</h4>
             @endif --}}

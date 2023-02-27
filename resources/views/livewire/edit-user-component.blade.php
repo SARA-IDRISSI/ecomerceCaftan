@@ -1,4 +1,6 @@
-<div class="container col-8 mx-auto">
+<div class="container mt-4 sha-dow p-5 col-8 mx-auto">
+    <div class="col-12 mb-5  text-white text-center"><img src="/{{ Auth::user()->image }}" class="image-dash" alt=""
+            srcset=""></div>
     @if ($validationMessage)
         <div class="alert alert-success">{{ $validationMessage }}</div>
     @endif
@@ -22,7 +24,7 @@
         <div class="col-12">
             <label for="formFile" class="form-label">Image</label>
             <input class="form-control" type="file" name="image" id="formFile" wire:model='image'>
-            <img wire src="/{{ $showImage }}" alt="">
+            <img wire src="/{{ $showImage }}" alt="" class="w-50 h-50">
         </div>
 
 

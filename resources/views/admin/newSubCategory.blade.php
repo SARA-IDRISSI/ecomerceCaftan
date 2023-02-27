@@ -12,11 +12,12 @@
         @if (session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
-        <form class="col-6" action="" method="POST">
+        <form class="col-10" action="" method="POST">
             @csrf
-            <h1>POUR AJOUTER UN SUB-CATEGORIE DANS LE NAV BAR</h1>
+            <h1 class="text-black mb-5 mt-3 titleDashboard">AJOUTER UN SUB-CATEGORIE</h1>
 
-            <div>
+
+            <div class="col-6">
                 <label for="" class="form-label">le nom de Subcatégorie</label>
                 <input type="text" name="title" id="" class="form-control">
                 <label for="" class="form-label">dans lequel</label>
@@ -27,7 +28,7 @@
                     @endfor
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-primary mt-3">Add</button>
         </form>
     </main>
 @endsection

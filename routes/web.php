@@ -14,18 +14,24 @@ use App\Http\Controllers\CordonnerPayerController;
 use App\Http\Controllers\forgotPasswordController;
 use App\Http\Controllers\PaimentController;
 use \App\Http\Controllers\ListCategoryController;
+use \App\Http\Controllers\ListSubCatController;
 use App\Http\Controllers\listOrderController;
 use App\Http\Controllers\NewArivalsController;
 use App\Http\Controllers\newCategoryController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\proposControl;
 use App\Http\Controllers\WishlistController;
 use App\Http\Livewire\AllProductComponent;
 use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\ContacterComponent;
+use App\Http\Livewire\EditCategoryComponent;
+use App\Http\Livewire\EditSubCategoryComponent;
+use App\Http\Livewire\EditSuBCategoryComponents;
 use App\Http\Livewire\EditUserComponent;
 use App\Http\Livewire\NewArivalsComponent;
 use App\Http\Livewire\SearchComponent;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -42,6 +48,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, "index"]);
 Route::get('/home', [HomeController::class, "index"]);
+Route::get('/propos', [proposControl::class, "propos"]);
 
 Route::get('/login', [AuthController::class, "login"])->name('login');
 Route::post('/login', [AuthController::class, "login"])->name('post-login');
@@ -63,6 +70,9 @@ Route::get('/listOrder', [listOrderController::class, "listOrder"]);
 
 Route::get('/listCategory', [ListCategoryController::class, "allListCategory"]);
 Route::post('/listCategory', [ListCategoryController::class, "allListCategory"]);
+
+Route::get('/listSubCategory', [ListSubCatController::class, "allListSubCategory"]);
+Route::post('/listSubCategory', [ListSubCatController::class, "allListSubCategory"]);
 
 Route::get('/dashboard', [DashboardController::class, "getDashboard"]);
 Route::post('/dashboard', [DashboardController::class, "getDashboard"]);
@@ -88,6 +98,7 @@ Route::post('/edit/{id}', [EditController::class, "edit"]);
 
 Route::get('/delete/{id}', [AllProductController::class, "delete"]);
 Route::get('/delete-category/{id}', [ListCategoryController::class, "delete"]);
+Route::get('/delete-sub-category/{id}', [ListSubCatController::class, "delete"]);
 
 Route::get('/pannier', [PannierController::class, "pannier"]);
 Route::post('/pannier', [PannierController::class, "pannier"])->name('pannier');
@@ -118,6 +129,7 @@ Route::get('/make-order', [OrdersController::class, "makeOrder"])->name("make-or
 Route::get('/show/{id}', [listOrderController::class, "show"]);
 
 Route::get('/newCategory',  [newCategoryController::class, "newCategory"]);
+Route::post('/newCategory',  [newCategoryController::class, "newCategory"]);
 
 Route::get('/forgotPassword', [forgotPasswordController::class, "forgot"]);
 Route::post('/sendEmail', [forgotPasswordController::class, "sendEmail"])->name("sendEmail");
@@ -128,3 +140,8 @@ Route::post('/changePassword', [changePasswordController::class, "changePassword
 Route::get('/search', SearchComponent::class)->name('product.search');
 
 Route::get('/contact', ContacterComponent::class);
+Route::get('/editCat/{id}', EditCategoryComponent::class)->name('editCateg');
+Route::get('/editSubCat/{id}', EditSuBCategoryComponents::class)->name('editSubCateg');
+
+
+// Route::get('/editSubCat/{id}',EditSubCategoryComponent::class)->name('editCateg');

@@ -18,7 +18,9 @@ class CategoryComponent extends Component
     public $productSizes;
 
     public $min_value = 0;
-    public $max_value = 1000;
+    public $max_value = 4000;
+    public $left = 0;
+    public $right = 0;
     public $orderBy = "Default Sorting";
 
     public function mount($id)
@@ -32,6 +34,18 @@ class CategoryComponent extends Component
     public function changeOrderBy($order)
     {
         $this->orderBy = $order;
+    }
+
+    public function handleRange($value, $type)
+    {
+
+        if ($this->max_value - $this->min_value >= 200 && $this->max_value <= 200) {
+            if ($type === "input-min") {
+                $this->left = ($this->min_value / 4000) * 100 + "%";
+            } else {
+                $this->right = 100 - ($this->max_value / 4000) * 100 + "%";
+            }
+        }
     }
     public function render()
     {

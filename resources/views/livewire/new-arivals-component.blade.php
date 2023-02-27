@@ -1,6 +1,18 @@
 <main class="row container mx-auto">
     <div class="col-3 mt-5">
-        <h4>Sizes</h4>
+        <div class="mt-2 mb-5">
+
+            <h4>Filter by price</h4>
+            <div id="slider-range"> </div>
+            <div class="label-input">
+                <span>min:</span> <input type="number" class="text-info" wire:model='min_value'> -
+                <span>max:</span>
+                <input class="text-info" type="number" wire:model="max_value">
+
+            </div>
+        </div>
+
+        <h4 class="mt-5">Sizes</h4>
         <div class="form-check">
             <input class="form-check-input" wire:model="sizeInputs" type="checkbox" value="xs" id="xs">
             <label class="form-check-label" for="xs">
@@ -68,29 +80,19 @@
 
         </div>
 
-        <div class="mt-5">
 
-            <h4>filter by price</h4>
-            <div id="slider-range"> </div>
-            <div class="label-input">
-                <span>min:</span> <input type="number" class="text-info" wire:model='min_value'> -
-                <span>max:</span>
-                <input class="text-info" type="number" wire:model="max_value">
-
-            </div>
-        </div>
     </div>
 
 
     <div class="col-9">
-        <p class="text-center fs-1">New Arrivals</p>
+        <p class="titleDashboard mt-5 fs-1">New Arrivals</p>
         <div class="d-flex justify-content-end">
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                <button class="btn colo dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     {{ $orderBy }}
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu linke">
                     <li class="dropdown-item"> <a wire:click.prevent="changeOrderBy('Default Sorting')"
                             href="#">Default
                             Sorting</a>

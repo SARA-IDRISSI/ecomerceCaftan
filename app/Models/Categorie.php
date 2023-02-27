@@ -10,6 +10,7 @@ class Categorie extends Model
     use HasFactory;
     protected $fillable = [
         'libeleCateg',
+        'imageCategory'
     ];
 
     public function subCategories()

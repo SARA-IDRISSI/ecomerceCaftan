@@ -77,18 +77,17 @@
                                             <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
                                                 @foreach ($categories as $category)
                                                     <div>
-                                                        <a class=""
+                                                        <a class="categTitle hoverCat"
                                                             href="/category/{{ $category->id }}">{{ $category->libeleCateg }}
                                                             @if (count($category->subCategories) > 0)
-                                                                &raquo;
                                                             @endif
                                                         </a>
                                                     </div>
                                                     @if (count($category->subCategories) > 0)
-                                                        <ul class="">
+                                                        <ul class="catgUl">
                                                             @foreach ($category->subCategories as $subCategory)
                                                                 <li>
-                                                                    <a class="dropdown-item boutique-title"
+                                                                    <a class="dropdown-item hoverCat subCatgTitle"
                                                                         href="#">{{ $subCategory->title }}</a>
                                                                 </li>
                                                             @endforeach
@@ -116,6 +115,9 @@
                                         </div>
                                     </div>
                                 </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/NewArivals">New Arivals</a>
                             </li>
                             {{-- contact --}}
                             <li class="nav-item">
@@ -167,17 +169,83 @@
     </header>
 
     {{ $slot }}
-    <footer>
-        @livewireScripts
 
-        <!-- JavaScript Bundle with Popper -->
-        <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
-        </script>
+    <!-- Site footer -->
+    <footer class="site-footer mb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <h6>NOUS CONTACTER</h6>
+                    <p class="text-justify"> <a href="">1377 parc industriel SAPINO,
+                            NOUACER,
+                            Casablanca,</a></p>
 
-        <script src="https://kit.fontawesome.com/552b1297ac.js" crossorigin="anonymous"></script>
+                    <pre>
+Du lundi au vendredi 10:00 - 18:00
+Samedi et dimanche fermés.
+Moroccan Tim
+                        </pre>
+                    <p>Téléphone : +212 713 700 446
+                    </p>
+                    {{-- <p>Courriel : <a href="mailto:info@classyandfabb.com" class="text-white"></a></p> --}}
+
+                </div>
+
+                <div class="col-xs-6 col-md-4">
+                    <h6>CATEGORIES</h6>
+                    <ul class="footer-links">
+                        <li><a href="http://scanfcode.com/category/c-language/">Caftan</a></li>
+                        <li><a href="http://scanfcode.com/category/front-end-development/">Takchita</a></li>
+                        <li><a href="http://scanfcode.com/category/back-end-development/">Bijoux</a></li>
+                        <li><a href="http://scanfcode.com/category/java-programming-language/">Boucles
+                                D'oreilles</a>
+                        </li>
+                        <li><a href="http://scanfcode.com/category/android/">Colliers</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-xs-6 col-md-4">
+                    <h6>NOUVELLES ET OFFRES</h6>
+                    Rejoignez notre famille et soyez les premiers à être informés des lancements de produits, des
+                    événements et de bien d'autres choses encore.
+                    <li class=" list-unstyled "><a href="http://scanfcode.com/category/android/"
+                            class="color">S'ABONNER</a></li>
+                    <ul class="social-icons">
+                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="twitter" href="#"> <i class="fa fa-twitter"></i></a></li>
+                        <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="text-center mx-auto">
+
+
+
+
+
+            <p class="copyright-text">Copyright &copy; 2022 Classy And Fabb. Tous droits réservés ❤❤❤❤❤
+            </p>
+
+
+
+
+        </div>
+        </div>
     </footer>
+    @livewireScripts
+
+    <!-- JavaScript Bundle with Popper -->
+    <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+    </script>
+
+    <script src="https://kit.fontawesome.com/552b1297ac.js" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

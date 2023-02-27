@@ -3,12 +3,12 @@ const addColor = (event, size) => {
     let lastIndex = $(`#last-index-${size}`).val();
     let indexes = $(`#indexes-${size}`).val();
     lastIndex++;
-    $(`.colors-${size}`).append(`<div class="col-2 mt-3 inputs_${lastIndex}_${size}">
-        <input name="color_${lastIndex}_${size}" type="color" class="form-control form-control-color ms-2"
+    $(`.colors-${size}`).append(`<div class="col-12 mt-3 inputs_${lastIndex}_${size}">
+        <input name="color_${lastIndex}_${size}" type="color" class="form-control inputStock form-control-color "
     id="exampleColorInput" value="#563d7c" title="Choose your color">
-        <input required name="stock_${lastIndex}_${size}" type="number"
-    class="form-control my-3  form-control-color" id="stock">
-    <button onclick="removeColor(event, ${lastIndex}, '${size}')" class="btn btn-primary btn-small"
+        <input required name="stock_${lastIndex}_${size}" type="number"  placeholder="Qty"
+    class="form-control my-3 inputStock form-control-color" id="stock">
+    <button onclick="removeColor(event, ${lastIndex}, '${size}')" class="btn btn-danger inputStock btn-small"
     id="btn-color-${lastIndex}-${size}">x</button>
     </div>`)
     $(`#indexes-${size}`).val(`${indexes}${lastIndex}`);

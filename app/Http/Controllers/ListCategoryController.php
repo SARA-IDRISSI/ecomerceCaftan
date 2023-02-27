@@ -9,7 +9,8 @@ class ListCategoryController extends Controller
 {
     public function allListCategory()
     {
-        $listGategory = Categorie::all();
+        $pagination = 1;
+        $listGategory = Categorie::paginate($pagination);
         return view("admin.listCategory", ["listCategory" => $listGategory]);
     }
     public function delete($id)

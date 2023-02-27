@@ -1,5 +1,35 @@
 <main class="row container mx-auto">
-    <div class="col-3 mt-5">
+    <div class="col-3 mt-5 ">
+
+        <div class="mb-5 mt-3 me-5">
+
+            <h4>Filter by price</h4>
+            <div class="price-input">
+                <div class="field">
+                    <span>Min</span>
+                    <input type="number" class="input-min" min="0" wire:model="min_value">
+                </div>
+                <div class="separator">-
+                </div>
+                <div class="field">
+                    <span>Max</span>
+                    <input type="number" class="input-max" min="0" wire:model="max_value">
+                </div>
+            </div>
+            <div class="slider">
+                <div class="progress"></div>
+            </div>
+            <div class="range-input">
+                <input type="range" class="range-min" min="0" max="4000" step="100"
+                    wire:model='min_value' wire:change="handleRange($event.target.value, 'input-max')">
+                <input type="range" class="range-max" min="0" max="4000" step="100"
+                    wire:model='max_value' wire:change="handleRange($event.target.value, 'input-max')">
+            </div>
+        </div>
+
+
+
+
         <h4>Sizes</h4>
         <div class="form-check">
             <input class="form-check-input" wire:model="sizeInputs" type="checkbox" value="xs" id="xs">
@@ -67,45 +97,34 @@
 
 
         </div>
-
-        <div class="mt-5">
-
-            <h4>filter by price</h4>
-            <div id="slider-range"> </div>
-            <div class="label-input">
-                <span>min:</span> <input type="number" class="text-info" wire:model='min_value'> -
-                <span>max:</span>
-                <input class="text-info" type="number" wire:model="max_value">
-
-            </div>
-        </div>
     </div>
 
+    {{-- <div class="col-1"></div> --}}
 
-    <div class="col-9">
-        <p class="text-center fs-1">{{ strtoupper($category->libeleCateg) }}</p>
-        <div class="d-flex justify-content-end">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
+
+    <div class="col-8 ">
+        <p class="text-black  mt-5  titleDashboard fs-1">{{ strtoupper($category->libeleCateg) }}</p>
+        <div class="d-flex justify-content-end mb-5">
+            <div class="dropdown ">
+                <button class="btn colo dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ $orderBy }}
                 </button>
                 <ul class="dropdown-menu">
-                    <li class="dropdown-item"> <a wire:click.prevent="changeOrderBy('Default Sorting')"
+                    <li class="dropdown-item linke "> <a wire:click.prevent="changeOrderBy('Default Sorting')"
                             href="#">Default
                             Sorting</a>
                     </li>
-                    <li class="dropdown-item"> <a wire:click.prevent="changeOrderBy('Price: Low to High')"
+                    <li class="dropdown-item linke"> <a wire:click.prevent="changeOrderBy('Price: Low to High')"
                             href="#">Price:
                             Low to
                             High</a>
                     </li>
-                    <li class="dropdown-item"> <a wire:click.prevent="changeOrderBy('Price: High to Low')"
+                    <li class="dropdown-item linke"> <a wire:click.prevent="changeOrderBy('Price: High to Low')"
                             href="#">Price:
                             High to
                             Low</a>
                     </li>
-                    <li class="dropdown-item"> <a wire:click.prevent="changeOrderBy('Sort By Newness')"
+                    <li class="dropdown-item linke"> <a wire:click.prevent="changeOrderBy('Sort By Newness')"
                             href="#">Sort
                             By Newness</a>
                     </li>
@@ -113,45 +132,86 @@
             </div>
         </div>
 
-        <div class="container row gx-1 mx-auto gy-5">
+        <div class="container row  mx-auto gy-5">
             @if ($message)
-                <h4>{{ $message }}</h4>
+                <h4 class="">{{ $message }}</h4>
             @endif
             @foreach ($products as $product)
-                <div class="col-3">
-                    <div class="card">
+                <div class="col-5 ">
+                    <div class=" position-relative overflow-hidden">
                         <a href="/detailProduct/{{ $product->id }}">
-                            <img src="/{{ $product->photo }}" class="img-boot-catg img-fluid">
+                            <img src="/{{ $product->photo }}" width="100%" class="imgCatgegory">
                             @if ($product->promo != 0)
-                                <span>promo</span>
+                                <span
+                                    class="position-absolute text-light top-10 end-0 iconBg rounded-circle p-2">promo</span>
                             @endif
                         </a>
 
-                        <h1>{{ $product->title }}</h1>
-                        @if ($product->promo == 1)
-                            <p class="price">${{ $product->prix_promotion }}</p>
-                            <p class="price">${{ $product->prix_actuel }}</p>
-                        @else
-                            <p class="price">${{ $product->prix_actuel }}</p>
-                        @endif
-                        @php
-                            $items = Cart::instance('wishlist')->search(function ($cartItem) use ($product) {
-                                return $cartItem->id == $product->id;
-                            });
-                        @endphp
-                        @if (count($items) > 0)
-                            <a href="/add-to-wishlist/{{ $product->id }}" class="iconList bg-danger">
-                                <i class="bi bi-heart"></i>
-                            </a>
-                        @else
-                            <a href="/add-to-wishlist/{{ $product->id }}" class="iconList">
-                                <i class="bi bi-heart"></i>
-                            </a>
-                        @endif
-                        <p><button>Acheter</button></p>
+                        <div class="icon_img">
+                            <a href="/detailProduct/{{ $product->id }}" class="me-2  iconBg rounded-circle p-2"><i
+                                    class="bi bi-eye"></i></a>
+
+
+                            @php
+                                $items = Cart::instance('wishlist')->search(function ($cartItem) use ($product) {
+                                    return $cartItem->id == $product->id;
+                                });
+                            @endphp
+                            @if (count($items) > 0)
+                                <a href="/add-to-wishlist/{{ $product->id }}"
+                                    class="iconList bg-danger iconBg rounded-circle p-2">
+                                    <i class="bi bi-heart-fill"></i>
+                                </a>
+                            @else
+                                <a href="/add-to-wishlist/{{ $product->id }}"
+                                    class="iconList iconBg rounded-circle p-2">
+                                    <i class="bi bi-heart"></i>
+                                </a>
+                            @endif
+                        </div>
+
+
+                    </div>
+                    <div class="text-center">
+                        <h3 class="mt-2">{{ $product->title }}</h3>
+                        <div class="d-flex justify-content-around">
+                            @if ($product->promo == 1)
+                                <p class="price color"> {{ $product->prix_promotion }} dh</p>
+                                <p class="price"><del> {{ $product->prix_actuel }} dh</del></p>
+                            @else
+                                <p class="price color"> {{ $product->prix_actuel }} dh</p>
+                            @endif
+                        </div>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
+
 </main>
+<script>
+    const rangeInput = document.querySelectorAll(".range-input input"),
+        priceInput = document.querySelectorAll(".price-input input"),
+        range = document.querySelector(".slider .progress");
+    let priceGap = 200;
+
+    priceInput.forEach((input) => {
+        input.addEventListener("input", (e) => {
+            let minPrice = parseInt(priceInput[0].value),
+                maxPrice = parseInt(priceInput[1].value);
+            console.log("test")
+
+            if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
+                if (e.target.className === "input-min") {
+                    rangeInput[0].value = minPrice;
+                    range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
+                    console.log((minPrice / rangeInput[0].max) * 100)
+                } else {
+                    rangeInput[1].value = maxPrice;
+                    range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+                    console.log(100 - (maxPrice / rangeInput[1].max) * 100)
+                }
+            }
+        });
+    });
+</script>

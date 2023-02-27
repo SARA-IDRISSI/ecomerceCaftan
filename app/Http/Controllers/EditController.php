@@ -60,7 +60,7 @@ class EditController extends Controller
                                     "stock" => $totalStock
                                 ]);
                         } else {
-                            $productSize = new ProductSize();
+                              $productSize = new ProductSize();
                             $productSize->product_id = $article->id;
                             $productSize->size = strtoupper($size);
                             $productSize->colors = $colorsAndStocksString;
@@ -99,5 +99,9 @@ class EditController extends Controller
                 return back();
             }
         }
+
+
     }
+
+
 }
