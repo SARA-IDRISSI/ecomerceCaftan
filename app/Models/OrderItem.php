@@ -17,6 +17,7 @@ class OrderItem extends Model
         'prix_total',
         'picture',
         'color',
-        'size'
+        'size',
+        "category"
     ];
 }

@@ -1,12 +1,12 @@
 const addColor = (event, size) => {
     event.preventDefault();
-    let lastIndex = $(`#last-index-${size}`).val();
+    let lastIndex = $(`#last-index-${size}`).val() ? $(`#last-index-${size}`).val() : 0;
     let indexes = $(`#indexes-${size}`).val();
     lastIndex++;
     $(`.colors-${size}`).append(`<div class="col-12 mt-3 inputs_${lastIndex}_${size}">
         <input name="color_${lastIndex}_${size}" type="color" class="form-control inputStock form-control-color "
     id="exampleColorInput" value="#563d7c" title="Choose your color">
-        <input required name="stock_${lastIndex}_${size}" type="number"  placeholder="Qty"
+        <input name="stock_${lastIndex}_${size}" type="number"  placeholder="Qty"
     class="form-control my-3 inputStock form-control-color" id="stock">
     <button onclick="removeColor(event, ${lastIndex}, '${size}')" class="btn btn-danger inputStock btn-small"
     id="btn-color-${lastIndex}-${size}">x</button>
@@ -36,8 +36,8 @@ $('#add-image').on('click', event => {
     let indexes = $(`#indexes-images`).val();
     $(`#count-images`).val(i);
     $('.images-container').append(`<div class="row col-4" id="image-container-${i}">
-        <input required oninput="handleImageChange(event, ${i})" type="file" name="image_${i}" id="image-file-${i}" class="form-control form-control-file" />
-        <input required type="color" name="image_color_${i}" class="form-control my-3 form-control-color" />
+        <input oninput="handleImageChange(event, ${i})" type="file" name="image_${i}" id="image-file-${i}" class="form-control form-control-file" />
+        <input type="color" name="image_color_${i}" class="form-control my-3 form-control-color" />
         <button onclick="removeImage(event, ${i})" class="btn btn-danger btn-small  mb-3">x</button>
     </div>`)
     $(`#indexes-images`).val(`${indexes}${i}`);

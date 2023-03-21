@@ -9,10 +9,12 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class DetailController extends Controller
 {
+    public $category, $product, $prodClorsSelectedQuantity;
+
     public function getProduct($id)
     {
         $article = Product::find($id);
-        $best_sellers = Product::orderBy("nbr_sales", "DESC")->limit(4)->get();
+        $best_sellers = Product::where("nbr_sales", ">", 0)->orderBy("nbr_sales", "DESC")->limit(4)->get();
 
         return view("detailProduct", ['article' => $article, "best_sellers" => $best_sellers]);
     }
@@ -28,20 +30,33 @@ class DetailController extends Controller
                     $color = $request->color;
                     $size = $request->size;
                     $product = Product::find($productId);
-                    Cart::add([
-                        "id" => $product->id,
-                        "name" => $product->title,
-                        "price" => $product->promo ? $product->prix_promotion : $product->prix_actuel,
-                        "weight" => 0,
-                        "qty" => $qty,
-                        "options" => ["photo" => $product->photo, "color" => $color, "size" => $size]
-                    ]);
-                    session()->put("last_visited", $productId);
-                    return redirect("/cordonnerPayer");
+                    if ($product->category->libeleCateg == "Bijoux") {
+                        Cart::instance('shopping')->add([
+                            "id" => $product->id,
+                            "name" => $product->title,
+                            "price" => $product->promo ? $product->prix_promotion : $product->prix_actuel,
+                            "weight" => 0,
+                            "qty" => $qty,
+                            "options" => ["photo" => $product->photo, "color" => $color, "size" => $size]
+                        ]);
+                    } else if ($color && $size) {
+                        $colors = array_column($product->imageProducts->toArray(), "color");
+                        $key = array_search($color, $colors);
+                        Cart::instance('shopping')->add([
+                            "id" => $product->id,
+                            "name" => $product->title,
+                            "price" => $product->promo ? $product->prix_promotion : $product->prix_actuel,
+                            "weight" => 0,
+                            "qty" => $qty,
+                            "options" => ["photo" => $product->imageProducts[$key]->image, "color" => $color, "size" => $size]
+                        ]);
+                    }
                 } else {
                     session()->flash("error", "Veuillez choisir la couleur et la taille");
                     return back();
                 }
+                session()->put("last_visited", $productId);
+                return redirect("/cordonnerPayer");
             } else {
                 return redirect("/login");
             }

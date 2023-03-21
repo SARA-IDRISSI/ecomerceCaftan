@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
+    <link href="https://fonts.cdnfonts.com/css/butler" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> --}}
     <link rel="stylesheet" href="{{ asset('css/mdb.min.css') }}" />
     <style>
         .dropdown-menu li {
@@ -77,18 +78,22 @@
                                             <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
                                                 @foreach ($categories as $category)
                                                     <div>
-                                                        <a class="categTitle hoverCat"
-                                                            href="/category/{{ $category->id }}">{{ $category->libeleCateg }}
-                                                            @if (count($category->subCategories) > 0)
-                                                            @endif
-                                                        </a>
+                                                        @if (count($category->subCategories) > 0)
+                                                            <span
+                                                                class="categTitle hoverCat">{{ $category->libeleCateg }}
+                                                            </span>
+                                                        @else
+                                                            <a class="categTitle hoverCat disabled"
+                                                                href="/category/{{ $category->id }}">{{ $category->libeleCateg }}
+                                                            </a>
+                                                        @endif
                                                     </div>
                                                     @if (count($category->subCategories) > 0)
                                                         <ul class="catgUl">
                                                             @foreach ($category->subCategories as $subCategory)
                                                                 <li>
-                                                                    <a class="dropdown-item subCatgTitle  hoverCat"
-                                                                        href="#">{{ $subCategory->title }}</a>
+                                                                    <a class="dropdown-item subCatgTitle hoverCat"
+                                                                        href="/sub-category/{{ $subCategory->id }}">{{ $subCategory->title }}</a>
                                                                 </li>
                                                             @endforeach
                                                         </ul>
@@ -210,7 +215,10 @@
                             href="/add-subcategory"><i class="bi bi-heart"></i> Product Prefer</a></div>
                 @endif
             </div>
+
+
             {{-- formulaire ajouter produit --}}
+
             {{ $slot }}
         </div>
     </main>

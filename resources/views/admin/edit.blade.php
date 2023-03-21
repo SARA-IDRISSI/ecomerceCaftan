@@ -5,7 +5,7 @@
 
 
     <div class="col-9 row addProd shadow-5-soft mt-3 pt-5 ps-5">
-        <h1 class="text-black mb-5  titleDashboard">Edit Product</h1>
+        <h1 class="text-black mb-5  titleDashboard">Modifier Article</h1>
 
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
@@ -20,10 +20,9 @@
                 <input value="{{ $article->title }}" type="text" name="title" id="" class="form-control">
             </div>
             <div class="col-4">
-                <label for="" class="form-label">add image</label>
+                <label for="" class="form-label">Ajouter image</label>
                 <input type="file" name="image" id="file" class="form-control" accept="image/*"
-                    onchange="previewImage();">
-                <img src="/{{ $article->photo }}" id="preview" class="w-70 h-" />
+                    onchange="previewImage();" /> <img src="/{{ $article->photo }}" id="preview" class="w-50" />
             </div>
             <div class="col-4">
                 <label for="" class="form-label">code bar</label>
@@ -39,75 +38,92 @@
             </div>
 
             {{-- tailles --}}
-            <div class="row g-3">
-                @foreach ($article->productSizes as $size)
-                    <div class="col-md-4">
-                        <div class="">
-                            <label for="inputState" class="form-label col-12  NomTaille">Taille
-                                {{ $size->size }}</label>
+            <p for="" class="mt-5 fs-2"> <i class="bi bi-check2"></i> Section Caftan / Takchita</p>
+            <div class="row g-3 border pb-5">
 
-                            <button onclick="addColor(event, '{{ strtolower($size->size) }}')"
-                                class="addcolor inputStock">Add
-                                color</button>
-                            @foreach ($size->colors as $color => $stock)
-                                <div class="colors colors-xs d-flex col-12 flex-wrap-{{ strtolower($size->size) }} d-flex">
-                                    <input type="hidden" value="1" id="last-index-{{ strtolower($size->size) }}" />
-                                    <input type="hidden" value="1"
-                                        name="colors_indexes_{{ strtolower($size->size) }}"
-                                        id="indexes-{{ strtolower($size->size) }}" />
-                                    <div class="col-2 mt-3 inputs_1_{{ strtolower($size->size) }}">
-                                        <input name="inputStock color_1_{{ strtolower($size->size) }}" type="color"
-                                            class="form-control form-control-color  inputStock" id="exampleColorInput"
-                                            value="{{ $color }}" title="Choose your color">
-
-                                        <input required name="stock_1_{{ strtolower($size->size) }}" type="number"
-                                            class="form-control my-3 my-3  form-control-color inputStock" id="stock"
-                                            value="{{ $stock }}">
-                                        <button onclick="removeColor(event, 1, '{{ strtolower($size->size) }}')"
-                                            class="btn btn-danger btn-small inputStock"
-                                            id="btn-color-1-{{ strtolower($size->size) }}">x</button>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endforeach
                 <div class="row g-3">
-                    @foreach ($sizes as $size)
-                        <div class="col-md-4">
-                            <label for="inputState" class="form-label col-12 NomTaille">Taille {{ $size }}</label>
-                            {{-- <input type="text" name="" id="" value="{{ $size }}" disabled> --}}
-                            {{-- <label for="exampleColorInput" class="form-label">Couleur</label> --}}
-                            <button onclick="addColor(event, '{{ strtolower($size) }}')"
-                                class="addcolor inputStock col-4">Add
-                                color</button>
-                            <div class="colors-{{ strtolower($size) }} d-flex">
-                                <input type="hidden" value="1" id="last-index-{{ strtolower($size) }}" />
-                                <input type="hidden" value="1" name="colors_indexes_{{ strtolower($size) }}"
-                                    id="indexes-{{ strtolower($size) }}" />
-                                <div class="col-12 mt-3 inputs_1_{{ strtolower($size) }}">
-                                    <input name="color_1_{{ strtolower($size) }}" type="color"
-                                        class="form-control form-control-color" id="exampleColorInput" value="#563d7c"
-                                        title="Choose your color">
-                                    <input required name="stock_1_{{ strtolower($size) }}" type="number"
-                                        class="form-control form-control-color inputStock my-3" id="stock">
-                                    <button onclick="removeColor(event, 1, '{{ strtolower($size) }}')"
-                                        class="btn btn-danger inputStock btn-small"
-                                        id="btn-color-1-{{ strtolower($size) }}">x</button>
+
+                    <div class="row g-3">
+                        @foreach ($article->productSizes as $size)
+                            <div class="col-4">
+                                <div class="">
+                                    <label for="inputState" class="form-label col-12  NomTaille">Taille
+                                        {{ $size->size }}</label>
+
+                                    <button onclick="addColor(event, '{{ strtolower($size->size) }}')"
+                                        class="addcolor inputStock">Ajouter
+                                        Couleur/Qty</button>
+                                    @foreach ($size->colors as $color => $stock)
+                                        <div class="colors colors-{{ strtolower($size->size) }} d-flex col-12 flex-wrap">
+                                            <input type="hidden" value="1"
+                                                id="last-index-{{ strtolower($size->size) }}" />
+                                            <input type="hidden" value="1"
+                                                name="colors_indexes_{{ strtolower($size->size) }}"
+                                                id="indexes-{{ strtolower($size->size) }}" />
+                                            <div class="col-2 mt-3 inputs_1_{{ strtolower($size->size) }}">
+                                                <input name="color_1_{{ strtolower($size->size) }}" type="color"
+                                                    class="form-control form-control-color inputStock"
+                                                    id="exampleColorInput" value="{{ $color }}"
+                                                    title="Choose your color">
+
+                                                <input required name="stock_1_{{ strtolower($size->size) }}" type="number"
+                                                    class="form-control my-3 my-3  form-control-color inputStock"
+                                                    id="stock" value="{{ $stock }}">
+                                                <button onclick="removeColor(event, 1, '{{ strtolower($size->size) }}')"
+                                                    class="btn btn-danger btn-small inputStock"
+                                                    id="btn-color-1-{{ strtolower($size->size) }}">x</button>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                        @foreach ($sizes as $size)
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label col-12 NomTaille">Taille
+                                    {{ $size }}</label>
+                                {{-- <input type="text" name="" id="" value="{{ $size }}" disabled> --}}
+                                {{-- <label for="exampleColorInput" class="form-label">Couleur</label> --}}
+                                <button onclick="addColor(event, '{{ strtolower($size) }}')"
+                                    class="addcolor inputStock col-4">Ajouter Couleur/Qty</button>
+                                <div class="colors-{{ strtolower($size) }} d-flex flex-wrap">
+                                    <input type="hidden" value="" id="last-index-{{ strtolower($size) }}" />
+                                    <input type="hidden" value="" name="colors_indexes_{{ strtolower($size) }}"
+                                        id="indexes-{{ strtolower($size) }}" />
+                                    {{-- <div class="col-12 mt-3 inputs_1_{{ strtolower($size) }}">
+                                        <input name="color_1_{{ strtolower($size) }}" type="color"
+                                            class="form-control form-control-color" id="exampleColorInput"
+                                            value="#563d7c" title="Choose your color">
+                                        <input required name="stock_1_{{ strtolower($size) }}" type="number"
+                                            class="form-control form-control-color inputStock my-3" id="stock">
+                                        <button onclick="removeColor(event, 1, '{{ strtolower($size) }}')"
+                                            class="btn btn-danger inputStock btn-small"
+                                            id="btn-color-1-{{ strtolower($size) }}">x</button>
+                                    </div> --}}
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
+            <p for="" class="mt-5 fs-2"> <i class="bi bi-check2"></i> Section Bijoux</p>
+            <div div class="row g-3 border pb-3 ">
+                <label for="" class="NomTaille">Qantity bijoux</label>
+                <input type="number" id="typeNumber" name="qtyB" value="{{ $article->qtyB }}"
+                    class="form-control ms-2 w-25 py-3" placeholder="Qty" />
 
-            <div class="images-container row mt-5 p-4 borderAddImg">
-                <input type="hidden" name="last_index_images" value="{{ count($article->productImages) }}"
+            </div>
+
+            <button id="add-image" class="my-5 addcolor"> Ajouter Toutes Les Images de Article </button>
+
+
+            <div class="images-container mx-auto container row my-3 p-4 ">
+                <input type="hidden" name="last_index_images" value="{{ count($article->imageProducts) }}"
                     id="last-index-image" />
                 <input type="hidden" name="colors_indexes_images"
-                    value="{{ implode('', array_map(fn($value) => $value + 1, array_keys($article->productImages->toArray()))) }}"
+                    value="{{ implode('', array_map(fn($value) => $value + 1, array_keys($article->imageProducts->toArray()))) }}"
                     id="indexes-images" />
-                @foreach ($article->productImages as $key => $image)
+                @foreach ($article->imageProducts as $key => $image)
                     <div class="row col-5 " id="image-container-{{ $key + 1 }}">
                         <div class="gy-2">
                             <input type="hidden" value="{{ $image->id }}" name="image_id_{{ $key + 1 }}" />
@@ -118,12 +134,14 @@
                             <input required type="color" name="image_color_{{ $key + 1 }}"
                                 class="form-control form-control-color" value="{{ $image->color }}" />
                             <button onclick="removeImage(event, {{ $key + 1 }})"
-                                class="btn btn-danger btn-small">x</button>
+                                class="btn btn-danger btn-small mb-3">x</button>
                         </div>
                     </div>
                 @endforeach
             </div>
-            <button id="add-image" class="my-5 addcolor"> add all image for product </button>
+
+
+
 
             <div class="col-6">
                 <label for="" class="form-label my-3">Quel Catégorie</label>
@@ -153,7 +171,7 @@
                     </select>
                 @endforeach
             </div>
-            <button type="submit" class="btn btn-primary my-4">Edit Product</button>
+            <button type="submit" class="btn colo my-4">Modifier Produit</button>
 
         </form>
 

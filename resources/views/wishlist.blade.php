@@ -2,20 +2,25 @@
 @section('title', 'Wishlist')
 @section('content')
     <main>
-        <div class="container mx-auto">
+        <div class="container row mx-auto">
+            <p class="panierTitle my-5 text-center text-black">Liste De Souhaits</p>
             @foreach (Cart::instance('wishlist')->content() as $key => $item)
-                <div class="col-md-3 mt-5 ">
-                    <div class="boxList d-flex justify-content-between">
+                <div class=" col-lg-4 col-md-6 mt-5 ">
+                    <div class="boxList d-flex ">
+
                         <div class="imgList pe-0 me-0 ">
-                            <a href=""><img src="/{{ $item->options->photo }}" class="  imgBox" /></a>
+                            <a href="/detailProduct/{{ $item->id }}" target="_blank"><img
+                                    src="/{{ $item->options->photo }}" class="imgBox" /></a>
                         </div>
+
+
                         <div class="descList ps-3 ">
                             <p class="descP pt-3 ">{{ $item->name }}</p>
                             @if ($item->options->prixPromo)
-                                <p class="ps-1 fs-3"> <del>{{ $item->options->prix_actuel }}</del>dh <span>
+                                <p class="ps-1 fs-5"> <del>{{ $item->options->prix_actuel }}</del>dh <span class="color">
                                         {{ $item->price }} dh</span></p>
                             @else
-                                <p class=" color fs-5"> <span>{{ $item->price }}dh</span></p>
+                                <p class="color fs-5"> <span class="color">{{ $item->price }}dh</span></p>
                             @endif
 
                         </div>
@@ -24,20 +29,8 @@
                         </a>
                     </div>
                 </div>
-
-                {{-- <tr>
-                            <th scope="row">{{ (int) $key + 1 }}</th>
-                            <td><img src="/{{ $item->options->photo }}" /></td>
-                            <td>{{ $item->name }}</td>
-                            <td><a href="{{ route('degrade', ['rowId' => $item->rowId]) }}">-</a>{{ $item->qty }}<a
-                                    href="{{ route('upgrade', ['rowId' => $item->rowId]) }}">+</a></td>
-                            <td>{{ $item->options->size }}</td>
-                            <td><input type="color" value="{{ $item->options->color }}" disabled /></td>
-                            <td>{{ $item->price }}</td>
-                            <td>{{ $item->price * $item->qty }}</td>
-                            <td><a href="{{ route('delete-from-cart', ['rowId' => $item->rowId]) }}">Delete</a></td>
-                        </tr> --}}
             @endforeach
+
         </div>
     </main>
 @endsection

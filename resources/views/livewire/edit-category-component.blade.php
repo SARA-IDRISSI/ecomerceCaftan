@@ -7,7 +7,7 @@
     @endif
     <form class="col-10" action="" method="POST" wire:submit.prevent="updateCategory">
         @csrf
-        <h1 class="titleDashboard w-100 mt-3 mb-5 ">EDIT THE CATEGORY </h1>
+        <h1 class="titleDashboard w-100 mt-3 mb-5 ">MODIFIER  CATEGORIES </h1>
 
         <div class="col-6">
             <label for="" class="form-label mb-3
@@ -20,7 +20,7 @@
             ">Image</label>
             <input type="file" name="name" id="" wire:model='name' class="form-control">
         </div>
-        <button type="submit" class="btn btn-primary mt-3">
-            Edit</button>
+        <button type="submit" class="btn colo mt-3">
+            Modifier</button>
     </form>
 </main>

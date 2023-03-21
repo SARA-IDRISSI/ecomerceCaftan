@@ -4,7 +4,9 @@
 
 @section('content')
     <div class="container col-6 mx-auto mt-5">
-
+        <h1 class="color p1 text-center my-5">
+            Change Password
+        </h1>
         <form action='' method="post">
             @csrf
             @if (session('error'))
@@ -30,7 +32,7 @@
                 <input type="password" name="confirm" class="form-control" id="exampleInputPassword1">
             </div>
             <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary">reset</button>
+                <button type="submit" class="btn colo">reset</button>
             </div>
 
 

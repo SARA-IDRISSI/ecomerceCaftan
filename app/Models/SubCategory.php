@@ -10,10 +10,15 @@ class SubCategory extends Model
     use HasFactory;
     protected $fillable = [
         'categorie_id',
-        'title'  
+        'title'
     ];
 
-    public function category() {
-        return $this->belongsTo(Categorie::class);
+    public function category()
+    {
+        return $this->belongsTo(Categorie::class, 'categorie_id');
+    }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }

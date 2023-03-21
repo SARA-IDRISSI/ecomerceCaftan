@@ -6,11 +6,15 @@ use App\Models\Categorie;
 use App\Models\Product;
 use App\Models\ProductSize;
 use Livewire\Component;
+use Livewire\WithPagination;
+
 
 class CategoryComponent extends Component
 
 {
-    public $products = [], $sizes, $sizeInputs = [], $colorsBtn = [];
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+    public  $sizes, $sizeInputs = [], $colorsBtn = [];
     protected $queryString = ['sizeInputs', 'colorsBtn'];
     public Categorie $category;
     public $categoryId;
@@ -26,7 +30,6 @@ class CategoryComponent extends Component
     public function mount($id)
     {
         $this->category = Categorie::find($id);
-        $this->products = $this->category->products();
         $this->productSizes = ProductSize::all();
         $this->categoryId = $id;
         $this->message = "";
@@ -49,76 +52,117 @@ class CategoryComponent extends Component
     }
     public function render()
     {
+        $products = $this->category->products();
         if ($this->orderBy == 'Price: Low to High') {
-            $this->products = Product::where('categorie_id', $this->categoryId)
-                ->where("promo", 1)
-                ->whereBetween('prix_promotion', [$this->min_value, $this->max_value])
-                ->orWhere("promo", 0)
-                ->whereBetween('prix_actuel', [$this->min_value, $this->max_value])
+            $products = Product::where('categorie_id', $this->categoryId)
+                ->when($this->min_value > 0 || $this->max_value < 4000, function ($query) {
+                    $query->where("promo", 1)
+                        ->whereBetween('prix_promotion', [$this->min_value, $this->max_value])
+                        ->orWhere("promo", 0)
+                        ->whereBetween('prix_actuel', [$this->min_value, $this->max_value])
+                        ->where('categorie_id', $this->categoryId);
+                })
                 ->when(count($this->sizeInputs) > 0, function ($query) {
                     $query->whereHas("productSizes", function ($q) {
                         $q->whereIn('size', $this->sizeInputs);
                     });
                 })->when(count($this->colorsBtn) > 0, function ($query) {
                     $query->whereHas("productSizes", function ($q) {
-                        $q->whereIn('colors', $this->colorsBtn);
+                        $firstColor = $this->colorsBtn[0];
+                        $q->where('colors', 'LIKE', "%$firstColor%");
+                        if (count($this->colorsBtn) > 1) {
+                            for ($i = 1; $i < count($this->colorsBtn); $i++) {
+                                $color = $this->colorsBtn[$i];
+                                $q->orWhere('colors', 'LIKE', "%$color%");
+                            }
+                        }
                     });
                 })->orderBy('prix_actuel', 'ASC')
-                ->get();
+                ->paginate(12);
         } else if ($this->orderBy == 'Price: High to Low') {
-            $this->products = Product::where('categorie_id', $this->categoryId)
-                ->where("promo", 1)
-                ->whereBetween('prix_promotion', [$this->min_value, $this->max_value])
-                ->orWhere("promo", 0)
-                ->whereBetween('prix_actuel', [$this->min_value, $this->max_value])
+            $products = Product::where('categorie_id', $this->categoryId)
+                ->when($this->min_value > 0 || $this->max_value < 4000, function ($query) {
+                    $query->where("promo", 1)
+                        ->whereBetween('prix_promotion', [$this->min_value, $this->max_value])
+                        ->orWhere("promo", 0)
+                        ->whereBetween('prix_actuel', [$this->min_value, $this->max_value])
+                        ->where('categorie_id', $this->categoryId);
+                })
                 ->when(count($this->sizeInputs) > 0, function ($query) {
                     $query->whereHas("productSizes", function ($q) {
                         $q->whereIn('size', $this->sizeInputs);
                     });
                 })->when(count($this->colorsBtn) > 0, function ($query) {
                     $query->whereHas("productSizes", function ($q) {
-                        $q->whereIn('colors', $this->colorsBtn);
+                        $firstColor = $this->colorsBtn[0];
+                        $q->where('colors', 'LIKE', "%$firstColor%");
+                        if (count($this->colorsBtn) > 1) {
+                            for ($i = 1; $i < count($this->colorsBtn); $i++) {
+                                $color = $this->colorsBtn[$i];
+                                $q->orWhere('colors', 'LIKE', "%$color%");
+                            }
+                        }
                     });
                 })->orderBy('prix_actuel', 'DESC')
-                ->get();
+                ->paginate(12);
         } else if ($this->orderBy == 'Sort By Newness') {
-            $this->products = Product::where('categorie_id', $this->categoryId)
-                ->where("promo", 1)
-                ->whereBetween('prix_promotion', [$this->min_value, $this->max_value])
-                ->orWhere("promo", 0)
-                ->whereBetween('prix_actuel', [$this->min_value, $this->max_value])
+            $products = Product::where('categorie_id', $this->categoryId)
+                ->when($this->min_value > 0 || $this->max_value < 4000, function ($query) {
+                    $query->where("promo", 1)
+                        ->whereBetween('prix_promotion', [$this->min_value, $this->max_value])
+                        ->orWhere("promo", 0)
+                        ->whereBetween('prix_actuel', [$this->min_value, $this->max_value])
+                        ->where('categorie_id', $this->categoryId);
+                })
                 ->when(count($this->sizeInputs) > 0, function ($query) {
                     $query->whereHas("productSizes", function ($q) {
                         $q->whereIn('size', $this->sizeInputs);
                     });
                 })->when(count($this->colorsBtn) > 0, function ($query) {
                     $query->whereHas("productSizes", function ($q) {
-                        $q->whereIn('colors', $this->colorsBtn);
+                        $firstColor = $this->colorsBtn[0];
+                        $q->where('colors', 'LIKE', "%$firstColor%");
+                        if (count($this->colorsBtn) > 1) {
+                            for ($i = 1; $i < count($this->colorsBtn); $i++) {
+                                $color = $this->colorsBtn[$i];
+                                $q->orWhere('colors', 'LIKE', "%$color%");
+                            }
+                        }
                     });
                 })->orderBy('created_at', 'DESC')
-                ->get();
+                ->paginate(12);
         } else {
-            $this->products = Product::where('categorie_id', $this->categoryId)
-                ->where("promo", 1)
-                ->whereBetween('prix_promotion', [$this->min_value, $this->max_value])
-                ->orWhere("promo", 0)
-                ->whereBetween('prix_actuel', [$this->min_value, $this->max_value])
+            $products = Product::where('categorie_id', $this->categoryId)
+                ->when($this->min_value > 0 || $this->max_value < 4000, function ($query) {
+                    $query->where("promo", 1)
+                        ->whereBetween('prix_promotion', [$this->min_value, $this->max_value])
+                        ->orWhere("promo", 0)
+                        ->whereBetween('prix_actuel', [$this->min_value, $this->max_value])
+                        ->where('categorie_id', $this->categoryId);
+                })
                 ->when(count($this->sizeInputs) > 0, function ($query) {
                     $query->whereHas("productSizes", function ($q) {
                         $q->whereIn('size', $this->sizeInputs);
                     });
                 })->when(count($this->colorsBtn) > 0, function ($query) {
                     $query->whereHas("productSizes", function ($q) {
-                        $q->whereIn('colors', $this->colorsBtn);
+                        $firstColor = $this->colorsBtn[0];
+                        $q->where('colors', 'LIKE', "%$firstColor%");
+                        if (count($this->colorsBtn) > 1) {
+                            for ($i = 1; $i < count($this->colorsBtn); $i++) {
+                                $color = $this->colorsBtn[$i];
+                                $q->orWhere('colors', 'LIKE', "%$color%");
+                            }
+                        }
                     });
                 })->orderBy('prix_actuel', 'ASC')
-                ->get();
+                ->paginate(12);
         }
-        if (count($this->products) == 0) {
-            $this->message = "No products available for " . implode(",", $this->sizeInputs);
+        if (count($products) == 0) {
+            $this->message = "No products available" . implode(",", $this->sizeInputs);
         } else {
             $this->message = "";
         }
-        return view('livewire.category-component')->layout("layouts.base");
+        return view('livewire.category-component', ["products" => $products])->layout("layouts.base");
     }
 }

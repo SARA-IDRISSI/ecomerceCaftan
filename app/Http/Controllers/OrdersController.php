@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\ProductSize;
 use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -36,9 +37,9 @@ class OrdersController extends Controller
     {
         $order = Order::create([
             "user_id" => Auth::user()->id,
-            "total" => Cart::priceTotal(),
+            "total" => Cart::instance('shopping')->priceTotal(),
         ]);
-        foreach (Cart::content() as $item) {
+        foreach (Cart::instance('shopping')->content() as $item) {
             OrderItem::create([
                 "order_id" => $order->id,
                 "title" => $item->name,
@@ -47,13 +48,33 @@ class OrdersController extends Controller
                 "qty" => $item->qty,
                 "picture" => $item->options->photo,
                 "color" => $item->options->color,
-                "size" => $item->options->size
+                "size" => $item->options->size,
+                "category" => $item->options->category
             ]);
             $product = Product::find($item->id);
+            if ($item->options->category != "Bijoux") {
+                $colors = [];
+                $productSize = Product::find($item->id)->productSizes()
+                    ->where('size',  $item->options->size)->first();
+                foreach ($productSize->colors as $color => $stock) {
+                    if ($item->options->color == $color) {
+                        $newStock = $stock - $item->qty;
+                        array_push($colors, "$color:$newStock");
+                    } else {
+                        array_push($colors, "$color:$stock");
+                    }
+                }
+                ProductSize::where("id", $productSize->id)->update([
+                    "colors" => implode(",", $colors),
+                    "stock" =>  $productSize->stock - $item->qty
+                ]);
+            }
             Product::where("id", $item->id)->update([
-                "nbr_sales" => $product->nbr_sales + 1
+                "nbr_sales" => $product->nbr_sales + 1,
+                "instock" => $product->instock - $item->qty
             ]);
         }
+        Cart::instance('shopping')->destroy();
         session()->flash("success", "Commande passée avec succès");
         return back();
     }

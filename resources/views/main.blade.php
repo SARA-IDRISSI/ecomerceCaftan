@@ -9,13 +9,16 @@
     <link href="https://fonts.cdnfonts.com/css/butler" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/shoe-logo-new_300x300.avif') }}">
+
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> --}}
     <link rel="stylesheet" href="{{ asset('css/mdb.min.css') }}" />
     <style>
         .dropdown-menu li {
@@ -43,8 +46,8 @@
 <body>
     <header>
         <nav>
-            <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm section_nav">
-                <div class="container img-header">
+            <nav class="navbar navbar-expand-xl bg-body-tertiary shadow-sm section_nav">
+                <div class="container-xl container-md container-sm container-xs img-header">
                     <a class="navbar-brand" href="/"><img src="{{ asset('images/shoe-logo-new_300x300.avif') }}"
                             alt="" class="logo"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -53,7 +56,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
+                    <div class="collapse navbar-collapse " id="navbarSupportedContent">
                         {{-- <form class="d-flex mx-auto " role="search">
                             <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
@@ -61,7 +64,7 @@
                         @livewire('header-search-component')
                         <ul class="navbar-nav me-0 mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link " aria-current="page" href="/">Home</a>
+                                <a class="nav-link " aria-current="page" href="/">Accueil</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/propos">A propos</a>
@@ -82,37 +85,41 @@
                                             <div class="col-md-6 col-lg-3  mb-lg-0">
                                                 @foreach ($categories as $category)
                                                     <div>
-                                                        <a class="categTitle hoverCat"
-                                                            href="/category/{{ $category->id }}">{{ $category->libeleCateg }}
-                                                            @if (count($category->subCategories) > 0)
-                                                            @endif
-                                                        </a>
+                                                        @if (count($category->subCategories) > 0)
+                                                            <span
+                                                                class="categTitle hoverCat">{{ $category->libeleCateg }}
+                                                            </span>
+                                                        @else
+                                                            <a class="categTitle hoverCat disabled"
+                                                                href="/category/{{ $category->id }}">{{ $category->libeleCateg }}
+                                                            </a>
+                                                        @endif
                                                     </div>
                                                     @if (count($category->subCategories) > 0)
                                                         <ul class="catgUl">
                                                             @foreach ($category->subCategories as $subCategory)
                                                                 <li>
                                                                     <a class="dropdown-item subCatgTitle hoverCat"
-                                                                        href="#">{{ $subCategory->title }}</a>
+                                                                        href="/sub-category/{{ $subCategory->id }}">{{ $subCategory->title }}</a>
                                                                 </li>
                                                             @endforeach
                                                         </ul>
                                                     @endif
                                                 @endforeach
                                             </div>
-                                            <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                                            <div class="col-md-12 col-lg-3 mb-3 mb-lg-0">
                                                 <a class="navbar-brand" href=""><img
                                                         src="{{ asset('images/b.webp') }}" alt=""
                                                         class="image-menu">
                                                 </a>
                                             </div>
-                                            <div class="col-md-6 col-lg-3 mb-3 mb-md-0">
+                                            <div class="col-md-12 col-lg-3 mb-3 mb-md-0">
                                                 <a class="navbar-brand " href=""><img
                                                         src="{{ asset('images/k.webp') }}" alt=""
                                                         class="image-menu">
                                                 </a>
                                             </div>
-                                            <div class="col-md-6 col-lg-3">
+                                            <div class="col-md-12 col-lg-3">
                                                 <a class="navbar-brand " href=""><img
                                                         src="{{ asset('images/t.jpg') }}" alt=""
                                                         class="image-menu"></a>
@@ -122,11 +129,11 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/NewArivals">New Arivals</a>
+                                <a class="nav-link" href="/NewArivals">Exclusif</a>
                             </li>
                             {{-- contact --}}
                             <li class="nav-item">
-                                <a class="nav-link" href="/contact">Contact</a>
+                                <a class="nav-link" href="/contact">Contacter</a>
                             </li>
                             <li class="nav-item dropdown">
                                 @if (Auth::check())
@@ -144,10 +151,12 @@
                                 @endif
                                 <ul class="dropdown-menu">
                                     @if (Auth::check())
-                                        <li><a class="dropdown-item" href="{{ route('logout') }}">logOut</a></li>
-                                        <li><a class="dropdown-item" href="/dashboard">Profile</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('logout') }}">Se déconnecter</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="/EditUser">Profile</a></li>
                                     @else
-                                        <li><a class="dropdown-item" href="{{ route('login') }}">login</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('login') }}">Se Connecter</a>
+                                        </li>
                                     @endif
 
 

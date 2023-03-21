@@ -1,5 +1,5 @@
 @extends('main')
-@section('title', 'HIKING BOOTS')
+@section('title', 'Paiment')
 
 @section('content')
     @paddleJS
@@ -26,13 +26,13 @@
             <p>Toutes les transactions sont sécurisées et chiffrées.</p>
 
             <div>
-                <div><input type="radio" name="paimentRadio" value="carte"> red</div>
+                <div><input type="radio" name="paimentRadio" value="carte"> Card</div>
                 <div class="carte boxPymnt">
                     <x-paddle-checkout :override="$payLink" width="400" />
                 </div>
 
-                <div><input type="radio" name="paimentRadio" value="cod"> green</div>
-                {{ $payLink }}
+                <div><input type="radio" name="paimentRadio" value="cod"> Paiement à la livraison</div>
+
                 <div class="cod boxPymnt">
                     <p>Paiement à la Livraison (Valable uniquement au Maroc)
                         Cash on delivery (Available only for Morocco)</p>

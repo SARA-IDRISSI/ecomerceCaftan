@@ -25,6 +25,6 @@
                 @endfor
             </select>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Edit</button>
+        <button type="submit" class="btn colo mt-3">Modifier</button>
     </form>
 </main>

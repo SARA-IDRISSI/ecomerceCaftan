@@ -9,7 +9,7 @@ class ListCategoryController extends Controller
 {
     public function allListCategory()
     {
-        $pagination = 1;
+        $pagination = 10;
         $listGategory = Categorie::paginate($pagination);
         return view("admin.listCategory", ["listCategory" => $listGategory]);
     }

@@ -1,5 +1,5 @@
 @extends('admin.dashboard')
-@section('title', 'HIKING BOOTS')
+@section('title', 'All Product Admin')
 @section('form')
     @livewireStyles
     <livewire:all-product-component />

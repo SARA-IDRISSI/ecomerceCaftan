@@ -1,5 +1,5 @@
 @extends('main')
-@section('title', 'HIKING BOOTS')
+@section('title', 'Cordonner client')
 
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/country-select-js/2.1.1/css/countrySelect.min.css"
@@ -65,22 +65,37 @@
 
         </form>
         <div class="row shadow-sm g-3 col-4" style="height:100%">
-            <div class="container mx-auto">
-                <div class="">
-                    @foreach (Cart::content() as $key => $item)
+            <div class=" row container mx-auto ">
+
+                <div class="col-6 heiight">
+                    @foreach (Cart::instance('shopping')->content() as $key => $item)
                         {{-- <th scope="row">{{ (int) $key + 1 }}</th> --}}
-                        <div><img src="/{{ $item->options->photo }}" /></div>
+                        <img src="/{{ $item->options->photo }}" class="w-75 my-5 mt-0" />
+                    @endforeach
+                </div>
+
+
+                <div class="col-6 heiight">
+                    @foreach (Cart::instance('shopping')->content() as $key => $item)
                         <div>{{ $item->name }}</div>
                         {{-- <div><a href="{{ route('degrade', ['rowId' => $item->rowId]) }}">-</a>{{ $item->qty }}<a
                                 href="{{ route('upgrade', ['rowId' => $item->rowId]) }}">+</a></div> --}}
-                        <div>{{ $item->options->size }}</div>
-                        <div><input type="color" value="{{ $item->options->color }}" disabled /></div>
+                        @if ($item->options->category != 'Bijoux')
+                            <div>{{ $item->options->size }}</div>
+
+                            <div><input type="color" value="{{ $item->options->color }}" disabled /></div>
+                        @endif
                         <div>{{ $item->price }}</div>
-                        <div>{{ $item->price * $item->qty }}</div>
-                        <div><a href="{{ route('delete-from-cart', ['rowId' => $item->rowId]) }}">Delete</a></div>
+                        <div>PT:{{ $item->price * $item->qty }}</div>
+                        <div>Q:{{ $item->qty }}</div>
+                        <div><a href="{{ route('delete-from-cart', ['rowId' => $item->rowId]) }}"
+                                class="text-danger">Delete</a></div>
                         <hr>
                     @endforeach
+
                 </div>
+                <div class="col-12 text-end color mt-5"> Prix Total :{{ Cart::instance('shopping')->priceTotal() }}
+                    dh</div>
             </div>
 
         </div>

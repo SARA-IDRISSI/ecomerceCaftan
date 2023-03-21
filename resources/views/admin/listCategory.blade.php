@@ -4,8 +4,10 @@
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
-        <table class="table tab_le">
-            <button class="btn btn-primary mb-5"> <a href="/add-category" class="text-white">Add Category</a></button>
+        <table class="table">
+            <h1 class="text-black mb-5  titleDashboard">Toute Les Catégories</h1>
+
+            <button class="btn colo mb-5"> <a href="/add-category" class="text-white">Ajouter Catégorie</a></button>
             <thead class="table-dark">
                 <th scope="col">#IdCategory</th>
                 <th scope="col">libelCategory</th>
@@ -24,12 +26,10 @@
                         <td>
 
                             <button class="btn btn-primary"><a href="{{ route('editCateg', $item->id) }}"
-                                    class="text-light"><i class="fa fa-pencil-square-o"
-                                        aria-hidden="true"></i>Update</a></button>
+                                    class="text-light"><i class="bi bi-pen"></i> Update</a></button>
 
                             <button class="btn btn-danger text-light" data-bs-toggle="modal"
-                                data-bs-target="#confirm-modal"> <i class="fa-solid fa-trash-can"
-                                    aria-hidden="true"></i>Delete</button>
+                                data-bs-target="#confirm-modal"> <i class="bi bi-trash3"></i> Delete</button>
 
 
                         </td>
@@ -37,7 +37,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title text-danger fs-1">Delete</h5>
+                                        <h5 class="modal-title text-danger fs-1">Supprimer</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -60,6 +60,7 @@
 
             </tbody>
         </table>
+
         {{ $listCategory->links('pagination::bootstrap-4') }}
 
     </section>

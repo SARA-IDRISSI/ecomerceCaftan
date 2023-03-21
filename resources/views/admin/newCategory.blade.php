@@ -29,7 +29,7 @@
 
 
             </div>
-            <button type="submit" class="btn btn-primary mt-3">Add</button>
+            <button type="submit" class="btn colo mt-3">Ajouter</button>
         </form>
     </main>
     <script>

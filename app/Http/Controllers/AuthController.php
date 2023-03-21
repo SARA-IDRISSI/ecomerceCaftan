@@ -35,6 +35,7 @@ class AuthController extends Controller
     {
         if ($request->isMethod('post')) {
             $myUser = User::where("email", "=", $request->email)->getQuery();
+            
             if ($myUser->exists()) {
                 session()->flash('error', "L'email existe déjà");
                 // $_SESSION['error'] = "email existe déjà"

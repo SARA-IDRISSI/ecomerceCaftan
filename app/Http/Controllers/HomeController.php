@@ -13,7 +13,7 @@ class HomeController extends Controller
         // Récupérer tous les produits;
         //$products = Product::all();
         $products = Product::orderBy("created_at", "DESC")->limit(10)->get();
-        $best_sellers = Product::orderBy("nbr_sales", "DESC")->limit(4)->get();
+        $best_sellers = Product::where("nbr_sales", ">", 0)->orderBy("nbr_sales", "DESC")->limit(4)->get();
 
         return view('home', ["products" => $products, "best_sellers" => $best_sellers]);
     }

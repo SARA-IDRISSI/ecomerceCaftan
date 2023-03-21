@@ -7,7 +7,9 @@
         <form action='{{ route('sendEmail') }}' method="post">
             @csrf
             <div class="mb-3">
-                <p class="alert alert-info">Forgot your password ? No problem.just write your email adress and we will email
+                <h1 class="color p1">Réinitialiser votre mot de passe</h1>
+                <p class="alert alert-secondary">Forgot your password ? No problem.just write your email adress and we will
+                    email
                     you a password reset link that will allow you to choose a new one. </p>
                 @if (session('error'))
                     <div class="alert alert-danger">{{ session('error') }}</div>
@@ -21,7 +23,7 @@
             </div>
 
             <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary">Confirmer</button>
+                <button type="submit" class="btn colo">Confirmer</button>
             </div>
 
     </div>

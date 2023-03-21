@@ -33,4 +33,4 @@ class changePasswordController extends Controller
     }
 }
 
-//
+

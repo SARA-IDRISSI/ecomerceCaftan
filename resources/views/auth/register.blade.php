@@ -4,9 +4,13 @@
 
 @section('content')
     <div class="container col-8 mx-auto">
+
         @if (session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
+        <h1 class="color p1 text-center my-5">
+            Register
+        </h1>
         <form action="" method="post" class="row g-3" enctype="multipart/form-data">
             @csrf
             <div class="col-md-6">
@@ -25,10 +29,7 @@
                 <label for="formFile" class="form-label">Image</label>
                 <input class="form-control" type="file" name="image" id="formFile">
             </div>
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary">Sign Up</button>
-            </div>
-            <div class="col-12">
+            <div class="col-12 mt-5 mb-4">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="gridCheck" name="newsletter">
                     <label class="form-check-label" for="gridCheck">
@@ -37,6 +38,10 @@
                     </label>
                 </div>
             </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn text-white fs-3 colo hvr-sweep-to-rightt">Sign Up</button>
+            </div>
+
         </form>
     </div>
 @endsection

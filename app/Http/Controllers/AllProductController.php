@@ -10,8 +10,7 @@ class AllProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        return view("admin.allProduct", ["articles" => $products]);
+        return view("admin.allProduct");
     }
 
     public function delete($id)

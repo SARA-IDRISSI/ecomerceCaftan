@@ -1,5 +1,5 @@
 @extends('main')
-@section('title', 'HIKING BOOTS')
+@section('title', 'SubCategories')
 @section('content')
     @livewireStyles
     <livewire:category-component />

@@ -21,6 +21,7 @@ class Product extends Model
         'prix_actuel',
         'prix_promotion',
         'promo',
+        'qtyB',
         'categorie_id',
         'sub_category_id'
     ];
@@ -30,7 +31,7 @@ class Product extends Model
         return $this->hasMany(ProductSize::class);
     }
 
-    public function productImages()
+    public function imageProducts()
     {
         return $this->hasMany(ImageProduct::class);
     }

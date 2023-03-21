@@ -3,7 +3,7 @@
 @section('content')
 
     <main style="overflow-x: hidden">
-        <div class="container-fluid row">
+        <div class="container-fluid  row">
             <div class="col-2 admin my-3 bg-dark">
                 <div class="col-12 mt-5  text-white text-center"><img src="/{{ Auth::user()->image }}" class="image-dash">
                 </div>
@@ -31,19 +31,27 @@
                             href="/listSubCategory"> &ensp;&ensp;&ensp; <i class="bi bi-grid"></i> SubCatégories</a></div>
                 @else
                     <div class="col-12 border-top border-bottom py-5 text-white text-center"><a class="text-white "
-                            href="/allProduct"><i class="bi bi-pencil"></i>
+                            href="/EditUser"><i class="bi bi-pencil"></i>
                             profile</a>
                     </div>
                     <div class="col-12 border-top border-bottom py-5 text-white text-center"><a class="text-white "
-                            href="/add-category">My <i class="bi bi-cart"></i>
-                            carte</a></div>
+                            href="/pannier"> <i class="bi bi-cart"></i>
+                            My carte </a></div>
                     <div class="col-12 border-top border-bottom py-5 text-white text-center"><a class="text-white "
-                            href="/add-subcategory"><i class="bi bi-heart"></i> Product Prefer</a></div>
+                            href="/wishlist"><i class="bi bi-heart"></i> Product Prefer</a></div>
                 @endif
             </div>
             {{-- formulaire ajouter produit --}}
             @yield('form')
+
+
+
         </div>
     </main>
 
 @endsection
+{{-- <div class="col-10 mt-5 w-75">
+
+                <img src="{{ asset('images/Sans titre.png') }}" alt="" class=" img-fluid" srcset="">
+
+            </div> --}}

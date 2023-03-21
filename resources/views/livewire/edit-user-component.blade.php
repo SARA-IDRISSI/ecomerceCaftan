@@ -1,6 +1,6 @@
 <div class="container mt-4 sha-dow p-5 col-8 mx-auto">
-    <div class="col-12 mb-5  text-white text-center"><img src="/{{ Auth::user()->image }}" class="image-dash" alt=""
-            srcset=""></div>
+    {{-- <div class="col-12 mb-5  text-white text-center"><img src="/{{ Auth::user()->image }}" class="image-dash" alt=""
+            srcset=""></div> --}}
     @if ($validationMessage)
         <div class="alert alert-success">{{ $validationMessage }}</div>
     @endif
@@ -8,8 +8,11 @@
         <div class="alert alert-danger">{{ $validationMessageError }}</div>
     @endif
     <form action="" method="post" class="row g-3" enctype="multipart/form-data">
+        <h2 class="mb-5 color">Mes Informations</h2>
         @csrf
+
         <div class="col-md-6">
+
             <label for="inputEmail4" class="form-label">Username</label>
             <input type="text" name="username" class="form-control" id="inputEmail4" wire:model='username'>
         </div>
@@ -22,9 +25,9 @@
             <input type="password" name="password" class="form-control" id="inputPassword4" wire:model='password'>
         </div>
         <div class="col-12">
-            <label for="formFile" class="form-label">Image</label>
+            <label for="formFile" class="form-label">Image(Optionnel)</label>
             <input class="form-control" type="file" name="image" id="formFile" wire:model='image'>
-            <img wire src="/{{ $showImage }}" alt="" class="w-50 h-50">
+            {{-- <img wire src="/{{ $showImage }}" alt="" class="w-50 h-50"> --}}
         </div>
 
 
@@ -38,7 +41,7 @@
             </div>
         </div>
         <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-primary" wire:click.prevent='post'>Edit</button>
+            <button type="submit" class="btn colo" wire:click.prevent='post'>Edit</button>
         </div>
 
     </form>
