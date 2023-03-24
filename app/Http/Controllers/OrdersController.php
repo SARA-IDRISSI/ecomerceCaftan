@@ -66,12 +66,12 @@ class OrdersController extends Controller
                 }
                 ProductSize::where("id", $productSize->id)->update([
                     "colors" => implode(",", $colors),
-                    "stock" =>  $productSize->stock - $item->qty
+                    "stock" =>  $productSize->stock > 0 ? $productSize->stock - $item->qty : 0
                 ]);
             }
             Product::where("id", $item->id)->update([
                 "nbr_sales" => $product->nbr_sales + 1,
-                "instock" => $product->instock - $item->qty
+                "instock" => $product->instock > 0 ? $product->instock - $item->qty : 0
             ]);
         }
         Cart::instance('shopping')->destroy();

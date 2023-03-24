@@ -128,9 +128,9 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link" href="/NewArivals">Exclusif</a>
-                            </li>
+                            </li> --}}
                             {{-- contact --}}
                             <li class="nav-item">
                                 <a class="nav-link" href="/contact">Contacter</a>

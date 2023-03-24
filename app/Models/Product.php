@@ -52,6 +52,7 @@ class Product extends Model
 
     public function setInstockAttribute()
     {
+        //  il calcule le stock totale et il ajoute dans la base de donner les stock des article qui j'ai ajouter
         $stock = 0;
         foreach ($this->productSizes as $item) {
             $stock += (int) $item->stock;

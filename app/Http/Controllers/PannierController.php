@@ -17,7 +17,7 @@ class PannierController extends Controller
                 $color = $request->color ?  $request->color : null;
                 $size = $request->size ? $request->size : null;
                 $product = Product::find($productId);
-                if ($product->category->libeleCateg == "Bijoux") {
+                if($product->category->libeleCateg == "Bijoux"){
                     Cart::instance('shopping')->add([
                         "id" => $product->id,
                         "name" => $product->title,

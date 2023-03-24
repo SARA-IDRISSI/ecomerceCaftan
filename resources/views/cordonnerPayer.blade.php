@@ -23,12 +23,12 @@
             <div class="col-6">
                 <label for="inputAddress" class="form-label">Nom</label>
                 <input required name="firstname" value="{{ Auth::user()->firstname }}" type="text" class="form-control"
-                    id="inputAddress" placeholder="1234 Main St">
+                    id="inputAddress">
             </div>
             <div class="col-6">
                 <label for="inputAddress2" class="form-label">Prénom</label>
                 <input required value="{{ Auth::user()->lastname }}" name="lastname" type="text" class="form-control"
-                    id="inputAddress2" placeholder="Apartment, studio, or floor">
+                    id="inputAddress2">
             </div>
             <div class="col-md-12">
                 <label for="inputEmail4" class="form-label">Adresse</label>
@@ -38,18 +38,18 @@
             <div class="col-6">
                 <label for="inputAddress" class="form-label">Code Postal</label>
                 <input required name="codePostal" value="{{ Auth::user()->codePostal }}" type="text" class="form-control"
-                    id="inputAddress" placeholder="1234 Main St">
+                    id="inputAddress">
             </div>
             <div class="col-6">
                 <label for="inputAddress2" class="form-label">ville</label>
                 <input required name="ville" value="{{ Auth::user()->ville }}" type="text" class="form-control"
-                    id="inputAddress2" placeholder="Apartment, studio, or floor">
+                    id="inputAddress2">
             </div>
 
             <div class="col-12">
                 <label for="inputAddress2" class="form-label">Téléphone</label>
                 <input name="contactNo" value="{{ Auth::user()->contactNo }}" type="text" class="form-control"
-                    id="inputAddress2" placeholder="Apartment, studio, or floor" required>
+                    id="inputAddress2" required>
             </div>
 
 

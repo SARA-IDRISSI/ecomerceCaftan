@@ -79,7 +79,7 @@
 
                             <label for="{{ $color }}"
                                 style="background-color: {{ $color }};
-                    border: @if (in_array("$color", $colorsBtn)) 3px solid; @endif"
+                    border: @if ($color == $colorsBtn) 3px solid; @endif"
                                 class="btn"></label>
                             <input id="{{ $color }}" wire:model="colorsBtn" type="checkbox" class="invisible"
                                 value="{{ "$color" }}" />
@@ -186,9 +186,9 @@
 
                                 <label for="{{ $color }}"
                                     style="background-color: {{ $color }};
-                        border: @if (in_array("$color", $colorsBtn)) 3px solid black; @endif"
+                        border: @if ($color = $colorsBtn) 3px solid black; @endif"
                                     class="btn"></label>
-                                <input id="{{ $color }}" wire:model="colorsBtn" type="checkbox"
+                                <input id="{{ $color }}" wire:model="colorsBtn" type="radio"
                                     class="invisible" value="{{ "$color" }}" />
                             </div>
                         @endif
@@ -256,65 +256,75 @@
                 <div class="col-md-6 col-lg-4  ">
                     <div class="position-relative overflow-hidden">
                         <a href="/detailProduct/{{ $product->id }}">
-                            <img src="/{{ $product->photo }}" width="100%" class="imgCatgegory">
-                            @if ($product->promo != 0)
-                                <span
-                                    class="position-absolute text-light top-10 end-0 iconBg rounded-circle p-2">Promo</span>
-                            @endif
-                        </a>
-
-                        <div class="icon_img">
-                            <a href="/detailProduct/{{ $product->id }}" class="me-2  iconBg rounded-circle p-2"><i
-                                    class="bi bi-eye"></i></a>
-
-                            @php
-                                $items = Cart::instance('wishlist')->search(function ($cartItem) use ($product) {
-                                    return $cartItem->id == $product->id;
-                                });
-                            @endphp
-                            @if (count($items) > 0)
-                                <a href="/add-to-wishlist/{{ $product->id }}"
-                                    class="iconList  iconBg rounded-circle p-2">
-                                    <i class="bi bi-heart-fill"></i>
-                                </a>
-                            @else
-                                <a href="/add-to-wishlist/{{ $product->id }}"
-                                    class="iconList iconBg rounded-circle p-2">
-                                    <i class="bi bi-heart"></i>
-                                </a>
-                            @endif
-                        </div>
-
-                    </div>
-                    <div class="text-center">
-                        <h3 class="mt-2">{{ $product->title }}</h3>
-                        <div class="d-flex justify-content-around">
-                            @if ($product->promo == 1)
-                                <p class="price color"> {{ $product->prix_promotion }} dh</p>
-                                <p class="price"><del> {{ $product->prix_actuel }} dh</del></p>
-                            @else
-                                <p class="price color"> {{ $product->prix_actuel }} dh</p>
-                            @endif
-                        </div>
-
-                        <ul class="gallery">
-                            @foreach ($product->imageProducts as $item)
-                                <img class="taillImg" src="/{{ $item->image }}">
+                            @if ($colorsBtn)
+                                @foreach ($product->imageProducts as $imageProduct)
+                                    @if ($imageProduct->color == $colorsBtn)
+                                        <img src="/{{ $imageProduct->image }}" width="100%" class="imgCatgegory">
+                                    @break
+                                @endif
                             @endforeach
-                            @if (count($product->imageProducts) >= 5)
-                                <span class="more color">+Plus</span>
-                            @endif
+                        @else
+                            <img src="/{{ $product->photo }}" width="100%" class="imgCatgegory">
+                        @endif
 
-                        </ul>
+                        @if ($product->promo != 0)
+                            <span
+                                class="position-absolute text-light top-10 end-0 iconBg rounded-circle p-2">Promo</span>
+                        @endif
+                    </a>
+
+                    <div class="icon_img">
+                        <a href="/detailProduct/{{ $product->id }}" class="me-2  iconBg rounded-circle p-2"><i
+                                class="bi bi-eye"></i></a>
+
+                        @php
+                            $items = Cart::instance('wishlist')->search(function ($cartItem) use ($product) {
+                                return $cartItem->id == $product->id;
+                            });
+                        @endphp
+                        @if (count($items) > 0)
+                            <a href="/add-to-wishlist/{{ $product->id }}"
+                                class="iconList  iconBg rounded-circle p-2">
+                                <i class="bi bi-heart-fill"></i>
+                            </a>
+                        @else
+                            <a href="/add-to-wishlist/{{ $product->id }}"
+                                class="iconList iconBg rounded-circle p-2">
+                                <i class="bi bi-heart"></i>
+                            </a>
+                        @endif
                     </div>
 
                 </div>
-            @endforeach
-            {{ $products->links() }}
-        </div>
+                <div class="text-center">
+                    <h3 class="mt-2">{{ $product->title }}</h3>
+                    <div class="d-flex justify-content-around">
+                        @if ($product->promo == 1)
+                            <p class="price color"> {{ $product->prix_promotion }} dh</p>
+                            <p class="price"><del> {{ $product->prix_actuel }} dh</del></p>
+                        @else
+                            <p class="price color"> {{ $product->prix_actuel }} dh</p>
+                        @endif
+                    </div>
 
+                    <ul class="gallery">
+                        @foreach ($product->imageProducts as $item)
+                            <img class="taillImg" src="/{{ $item->image }}">
+                        @endforeach
+                        @if (count($product->imageProducts) >= 5)
+                            <span class="more color">+Plus</span>
+                        @endif
 
+                    </ul>
+                </div>
+
+            </div>
+        @endforeach
+        {{ $products->links() }}
     </div>
+
+
+</div>
 
 
 </main>

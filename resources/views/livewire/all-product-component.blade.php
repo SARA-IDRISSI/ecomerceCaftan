@@ -14,7 +14,7 @@
         <div class="col-4 my-3 ">
             <select type="search" placeholder="filtrer par Promo" wire:change='handleChangePromo($event.target.value)'
                 class="form-control  w-75 ">
-                <option></option>
+                <option>Filter Par Promo</option>
                 <option @if ($promo == 1) selected @endif value="1">Yes</option>
                 <option @if ($promo == 0) selected @endif value="0">No</option>
             </select>

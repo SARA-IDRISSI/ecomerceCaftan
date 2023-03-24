@@ -14,7 +14,7 @@
         <form action="" method="post" class="row g-3" enctype="multipart/form-data">
             @csrf
             <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">Username</label>
+                <label for="inputEmail4" class="form-label">Nom</label>
                 <input type="text" name="username" class="form-control" id="inputEmail4">
             </div>
             <div class="col-md-6">
@@ -22,11 +22,11 @@
                 <input type="email" name="email" class="form-control" id="inputEmail4">
             </div>
             <div class="col-md-6">
-                <label for="inputPassword4" class="form-label">Password</label>
+                <label for="inputPassword4" class="form-label">Mot De Passe</label>
                 <input type="password" name="password" class="form-control" id="inputPassword4">
             </div>
             <div class="col-12">
-                <label for="formFile" class="form-label">Image</label>
+                <label for="formFile" class="form-label">Image(Optionnel)</label>
                 <input class="form-control" type="file" name="image" id="formFile">
             </div>
             <div class="col-12 mt-5 mb-4">

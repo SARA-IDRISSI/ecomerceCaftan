@@ -14,7 +14,7 @@ class CategoryComponent extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public  $sizes, $sizeInputs = [], $colorsBtn = [];
+    public  $sizes, $sizeInputs = [], $colorsBtn;
     protected $queryString = ['sizeInputs', 'colorsBtn'];
     public Categorie $category;
     public $categoryId;
@@ -66,16 +66,10 @@ class CategoryComponent extends Component
                     $query->whereHas("productSizes", function ($q) {
                         $q->whereIn('size', $this->sizeInputs);
                     });
-                })->when(count($this->colorsBtn) > 0, function ($query) {
+                })->when($this->colorsBtn, function ($query) {
                     $query->whereHas("productSizes", function ($q) {
-                        $firstColor = $this->colorsBtn[0];
+                        $firstColor = $this->colorsBtn;
                         $q->where('colors', 'LIKE', "%$firstColor%");
-                        if (count($this->colorsBtn) > 1) {
-                            for ($i = 1; $i < count($this->colorsBtn); $i++) {
-                                $color = $this->colorsBtn[$i];
-                                $q->orWhere('colors', 'LIKE', "%$color%");
-                            }
-                        }
                     });
                 })->orderBy('prix_actuel', 'ASC')
                 ->paginate(12);
@@ -92,16 +86,10 @@ class CategoryComponent extends Component
                     $query->whereHas("productSizes", function ($q) {
                         $q->whereIn('size', $this->sizeInputs);
                     });
-                })->when(count($this->colorsBtn) > 0, function ($query) {
+                })->when($this->colorsBtn, function ($query) {
                     $query->whereHas("productSizes", function ($q) {
-                        $firstColor = $this->colorsBtn[0];
+                        $firstColor = $this->colorsBtn;
                         $q->where('colors', 'LIKE', "%$firstColor%");
-                        if (count($this->colorsBtn) > 1) {
-                            for ($i = 1; $i < count($this->colorsBtn); $i++) {
-                                $color = $this->colorsBtn[$i];
-                                $q->orWhere('colors', 'LIKE', "%$color%");
-                            }
-                        }
                     });
                 })->orderBy('prix_actuel', 'DESC')
                 ->paginate(12);
@@ -118,16 +106,10 @@ class CategoryComponent extends Component
                     $query->whereHas("productSizes", function ($q) {
                         $q->whereIn('size', $this->sizeInputs);
                     });
-                })->when(count($this->colorsBtn) > 0, function ($query) {
+                })->when($this->colorsBtn, function ($query) {
                     $query->whereHas("productSizes", function ($q) {
-                        $firstColor = $this->colorsBtn[0];
+                        $firstColor = $this->colorsBtn;
                         $q->where('colors', 'LIKE', "%$firstColor%");
-                        if (count($this->colorsBtn) > 1) {
-                            for ($i = 1; $i < count($this->colorsBtn); $i++) {
-                                $color = $this->colorsBtn[$i];
-                                $q->orWhere('colors', 'LIKE', "%$color%");
-                            }
-                        }
                     });
                 })->orderBy('created_at', 'DESC')
                 ->paginate(12);
@@ -144,16 +126,10 @@ class CategoryComponent extends Component
                     $query->whereHas("productSizes", function ($q) {
                         $q->whereIn('size', $this->sizeInputs);
                     });
-                })->when(count($this->colorsBtn) > 0, function ($query) {
+                })->when($this->colorsBtn, function ($query) {
                     $query->whereHas("productSizes", function ($q) {
-                        $firstColor = $this->colorsBtn[0];
+                        $firstColor = $this->colorsBtn;
                         $q->where('colors', 'LIKE', "%$firstColor%");
-                        if (count($this->colorsBtn) > 1) {
-                            for ($i = 1; $i < count($this->colorsBtn); $i++) {
-                                $color = $this->colorsBtn[$i];
-                                $q->orWhere('colors', 'LIKE', "%$color%");
-                            }
-                        }
                     });
                 })->orderBy('prix_actuel', 'ASC')
                 ->paginate(12);

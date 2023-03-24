@@ -4,8 +4,6 @@
 
     <main>
 
-
-
         <section class=" w-100 ">
             <img src="{{ asset('images/image1.webp') }}" class="img-fluid " alt="...">
         </section>

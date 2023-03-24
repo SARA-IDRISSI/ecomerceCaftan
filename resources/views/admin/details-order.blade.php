@@ -26,7 +26,7 @@
                     <p class=" text-uppercase p1 fs-4"> <span class="color">qty:</span> {{ $item->qty }}</p>
                     @if ($item->category != 'Bijoux')
                         <p class=" text-uppercase p1 fs-4"> <span class="color">color:</span> <input type="color"
-                                name="" value="{{ $item->color }}" id=""></p>
+                                name="" value="{{ $item->color }}" id="" disabled></p>
                         <p class=" text-uppercase p1 fs-4"> <span class="color">size:</span> {{ $item->size }}</p>
                     @endif
                     <p class=" text-uppercase p1 fs-4 border ps-2"> <span class="color">prix total:</span>

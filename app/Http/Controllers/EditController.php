@@ -36,11 +36,11 @@ class EditController extends Controller
                 }
                 $instock = 0;
                 // *
-                if ($request->size_count > 0) {
-                    for ($i = 1; $i <= $request->size_count; $i++) {
-                        $instock += $request->input("stock-$i");
-                    }
-                }
+                // if ($request->size_count > 0) {
+                //     for ($i = 1; $i <= $request->size_count; $i++) {
+                //         $instock += $request->input("stock-$i");
+                //     }
+                // }
                 $category = Categorie::find($request->category_id);
                 Product::where("id", $article->id)->update([
                     'title' => $request->title,
@@ -59,7 +59,7 @@ class EditController extends Controller
                     $sizes = array("xs", "s", "m", "l", "xl", "xxl");
                     foreach ($sizes as $size) {
                         // ["colors_indexes_$size"]
-                        if ($request->filled(["colors_indexes_$size"]))  {
+                        if ($request->filled(["colors_indexes_$size"])) {
                             // split string
                             $colorsAndStockIndexes = str_split($request->input("colors_indexes_$size"));
                             $colorsAndStocks = [];
@@ -88,6 +88,7 @@ class EditController extends Controller
                             }
                         }
                     }
+                    // le nom de input formulaire
                     if ($request->filled(["colors_indexes_images"])) {
                         $indexes = str_split($request->colors_indexes_images);
                         foreach ($indexes as $index) {

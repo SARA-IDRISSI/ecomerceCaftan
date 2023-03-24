@@ -36,13 +36,10 @@
                         </div>
                     </div>
                 </div>
-
-
-
                 <hr>
+
             @endforeach
             <div class="col-12 text-end color mt-5"> Prix Total :{{ Cart::instance('shopping')->priceTotal() }} dh</div>
-
             <div class="col-4">
                 <button class="colo border-0 px-3 py-2 my-1 "> <a href="/detailProduct/{{ session('last_visited') }}"
                         class="colo">Countinuer
@@ -54,7 +51,6 @@
                             now</a></button>
                 @endif
             </div>
-
         </div>
 
         {{--
